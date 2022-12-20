@@ -1,13 +1,13 @@
-## Expenses
+## Products
 
-### Get all of the Current User's Expenses
+### Get all Products
 
-Return all of the current user's expenses
+Returns all the products.
 
-* Require Authentication: true
+* Require Authentication: false
 * Request
   * Method: GET
-  * URL: /api/expenses/current
+  * URL: /api/products
   * Body: none
 
 * Successful Response
@@ -18,23 +18,19 @@ Return all of the current user's expenses
 
     ```json
     {
-      "Expenses": [
+      "Products": [
         {
           "id": 1,
-          "description": "Good",
-          "user_id": 1,
-          "group_id": 3,
-          "recipient_id": 2,
-          "amount": 30.99,
-          "date": null,
-          "note": "thanks",
-          "status": "Accepted",
-          "Opposing_User": {
+          "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+          "description": "Infant Toy",
+          "avalibility": 10,
+          "sellerId": 1,
+          "categoryId": 5,
+          "price": 30.99,
+          "previewImage": "image url",
+          "Seller": {
             "id": 1,
-            "first_name": "John",
-            "last_name": "Doe",
             "username": "johndoe",
-            "nickname": "Johnny",
             "email": "john@doe.com",
           },
           "createdAt": "2021-11-19 20:39:36",
@@ -44,17 +40,17 @@ Return all of the current user's expenses
     }
     ```
 
-### Get all Expenses for a Group based on the Group's id
+### Get all of the Current User's Product Listings
 
-Return all the expenses for a group based on the Group's id
+Return all of the current user's product listings
 
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /api/groups/:groupId/expenses
+  * URL: /api/products/current
   * Body: none
 
-* Successful Response:
+* Successful Response
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
@@ -62,70 +58,46 @@ Return all the expenses for a group based on the Group's id
 
     ```json
     {
-      "Expenses": [
+      "Products": [
         {
           "id": 1,
-          "description": "Good",
-          "user_id": 1,
-          "group_id": 3,
-          "recipient_id": 2,
-          "amount": 30.99,
-          "date": null,
-          "note": "thanks",
-          "status": "Accepted",
-          "User": {
+          "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+          "description": "Infant Toy",
+          "avalibility": 10,
+          "sellerId": 1,
+          "categoryId": 5,
+          "price": 30.99,
+          "previewImage": "image url",
+          "Seller": {
             "id": 1,
-            "first_name": "John",
-            "last_name": "Doe",
             "username": "johndoe",
-            "nickname": "Johnny",
             "email": "john@doe.com",
           },
-          "Recipient": {
-            "id": 1,
-            "first_name": "John",
-            "last_name": "Doe",
-            "username": "johndoe",
-            "nickname": "Johnny",
-            "email": "john@doe.com",
-          },
+          "createdAt": "2021-11-19 20:39:36",
+          "updatedAt": "2021-11-19 20:39:36"
         }
       ]
     }
     ```
 
-* Error response: Couldn't find a Group with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+### Create a prodcuct listing
 
-    ```json
-    {
-      "message": "Group couldn't be found",
-      "statusCode": 404
-    }
-    ```
-
-### Create an Expense
-
-Create and return a new expense
+Create and return a new product
 
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /api/expenses/
+  * URL: /api/products
   * Body:
 
     ```json
     {
-        "description": "Good",
-        "user_id": 1,
-        "group_id": null,
-        "recipient_id": 2,
-        "amount": 30.99,
-        "date": null,
-        "note": null
+      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+      "description": "Infant Toy",
+      "avalibility": 10,
+      "categoryId": 5,
+      "price": 30.99,
+      "previewImage": "image url",
     }
     ```
 
@@ -137,16 +109,21 @@ Create and return a new expense
 
     ```json
     {
+      "id": 1,
+      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+      "description": "Infant Toy",
+      "avalibility": 10,
+      "sellerId": 1,
+      "categoryId": 5,
+      "price": 30.99,
+      "previewImage": "image url",
+      "Seller": {
         "id": 1,
-        "description": "Good",
-        "user_id": 1,
-        "group_id": null,
-        "recipient_id": 2,
-        "amount": 30.99,
-        "date": null,
-        "note": null,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36"
+        "username": "johndoe",
+        "email": "john@doe.com",
+      },
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
@@ -161,48 +138,35 @@ Create and return a new expense
       "message": "Validation error",
       "statusCode": 400,
       "errors": {
+        "name": "Name required",
         "description": "Description required",
-        "amount": "Amount must be a number and is required",
+        "price": "Price is required and must be greater than 0",
+        "avalibility": "Avalibility is required and must be greater than 0"
       }
     }
     ```
 
-* Error response: Couldn't find a User, Recipient or Group with given Id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+### Edit a product listing
 
-    ```json
-    {
-      "message": "User, Recipient, or Group not found.",
-      "statusCode": 404
-    }
-    ```
-
-
-### Edit an Expense
-
-Update an exisitng expense.
+Update an exisitng product.
 
 * Require Authentication: true
-* Require proper authorization: Expense must belong to the current user
+* Require proper authorization: Product must belong to the current user
 * Request
   * Method: PUT
-  * URL: /api/expenses/:expenseId
+  * URL: /api/products/:productId
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-        "description": "Good",
-        "user_id": 1,
-        "group_id": null,
-        "recipient_id": 2,
-        "amount": 30.99,
-        "date": null,
-        "note": null
+      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+      "description": "Infant Toy",
+      "avalibility": 10,
+      "categoryId": 5,
+      "price": 30.99,
+      "previewImage": "image url",
     }
     ```
 
@@ -214,16 +178,21 @@ Update an exisitng expense.
 
     ```json
     {
+      "id": 1,
+      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+      "description": "Infant Toy",
+      "avalibility": 10,
+      "sellerId": 1,
+      "categoryId": 5,
+      "price": 30.99,
+      "previewImage": "image url",
+      "Seller": {
         "id": 1,
-        "description": "Good",
-        "user_id": 1,
-        "group_id": null,
-        "recipient_id": 2,
-        "amount": 30.99,
-        "date": null,
-        "note": null,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36"
+        "username": "johndoe",
+        "email": "john@doe.com",
+      },
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
@@ -238,13 +207,15 @@ Update an exisitng expense.
       "message": "Validation error",
       "statusCode": 400,
       "errors": {
+        "name": "Name required",
         "description": "Description required",
-        "amount": "Amount must be a number and is required",
+        "price": "Price is required and must be greater than 0",
+        "avalibility": "Avalibility is required and must be greater than 0"
       }
     }
     ```
 
-* Error response: Couldn't find a User, Recipient or Group with given Id
+* Error response: Couldn't find a product with given product Id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -252,20 +223,20 @@ Update an exisitng expense.
 
     ```json
     {
-      "message": "User, Recipient, or Group not found.",
+      "message": "Product not found.",
       "statusCode": 404
     }
     ```
 
-### Delete an Expense
+### Delete a product listing
 
-Delete an existing expense.
+Delete an existing product listing
 
 * Require Authentication: true
-* Require proper authorization: Expense must have status "Pending"
+* Require proper authorization: Product must belong to the current user.
 * Request
   * Method: DELETE
-  * URL: /api/expenses/:expenseId
+  * URL: /api/products/:productId
   * Body: none
 
 * Successful Response
@@ -281,7 +252,7 @@ Delete an existing expense.
     }
     ```
 
-* Error response: Couldn't find an Expense with the specified id
+* Error response: Couldn't find a product with given product Id
   * Status Code: 404
   * Headers:
     * Content-Type: application/json
@@ -289,25 +260,8 @@ Delete an existing expense.
 
     ```json
     {
-      "message": "Expense couldn't be found",
+      "message": "Product not found.",
       "statusCode": 404
     }
     ```
 
-* Error response: Expenses that have been completed or declined can't be deleted
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
-
-    ```json
-    {
-      "message": "Expenses that have been completed or declined can't be deleted",
-      "statusCode": 403
-    }
-    ```
-
-
-<!-- ### Create an Expense from a Group based on the Group's id ??? -->
-
-<!-- ### Get all Shared Expenses Between Individuals given other User's id ???

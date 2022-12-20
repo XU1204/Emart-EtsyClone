@@ -217,8 +217,6 @@ user's information.
       "errors": {
         "email": "Invalid email",
         "username": "Username is required",
-        "firstName": "First Name is required",
-        "lastName": "Last Name is required"
       }
     }
     ```
