@@ -33,6 +33,10 @@ Returns all the products.
             "username": "johndoe",
             "email": "john@doe.com",
           },
+          "Category": {
+            "id": 1,
+            "categoryName": "kids",
+          },
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -72,6 +76,10 @@ Return all of the current user's product listings
             "id": 1,
             "username": "johndoe",
             "email": "john@doe.com",
+          },
+          "Category": {
+            "id": 1,
+            "categoryName": "kids",
           },
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
@@ -122,6 +130,10 @@ Create and return a new product
         "username": "johndoe",
         "email": "john@doe.com",
       },
+      "Category": {
+            "id": 1,
+            "categoryName": "kids",
+          },
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
     }
@@ -191,6 +203,10 @@ Update an exisitng product.
         "username": "johndoe",
         "email": "john@doe.com",
       },
+      "Category": {
+            "id": 1,
+            "categoryName": "kids",
+          },
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
     }
@@ -264,4 +280,3 @@ Delete an existing product listing
       "statusCode": 404
     }
     ```
-
