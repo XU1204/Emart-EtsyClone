@@ -10,7 +10,7 @@ class Product(db.Model):
     seller_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    price = db.Column(db.float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
     avalibility = db.Column(db.Integer, nullable=False)
     preview_image = db.Column(db.String, default='https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png')
@@ -18,6 +18,6 @@ class Product(db.Model):
     updated_at = db.Column(db.Date, server_default=db.func.now(), server_onupdate=db.func.now())
 
     seller = db.relationship('User', back_populates='products')
-    category = db.relathionship('Category', back_populates='products')
+    category = db.relationship('Category', back_populates='products')
     reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan")
     cart_items = db.relationship('Cart', back_populates='item', cascade="all, delete-orphan")
