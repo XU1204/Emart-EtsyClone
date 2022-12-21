@@ -21,3 +21,24 @@ class Product(db.Model):
     category = db.relationship('Category', back_populates='products')
     reviews = db.relationship('Review', back_populates='product', cascade="all, delete-orphan")
     cart_items = db.relationship('Cart', back_populates='item', cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "avalibility": self.avalibility,
+            "sellerId": self.seller_id,
+            "categoryId": self.category_id,
+            "price": self.price,
+            "previewImage": self.preview_image,
+            "Seller": {
+                "id": self.seller.id,
+                "username": self.seller.username,
+                "email": self.seller.email,
+            },
+            "Category": {
+                "id": self.category.id,
+                "categoryName": self.category.category_name,
+            },
+        }
