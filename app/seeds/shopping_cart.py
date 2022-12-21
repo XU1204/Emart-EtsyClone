@@ -1,14 +1,14 @@
 from app.models import db, Cart, environment, SCHEMA
 
 def seed_carts():
-    carts = {
+    carts = (
         ['1', '2', 1],
         ['1', '3', 2],
         ['2', '3', 2],
         ['2', '4', 1],
         ['3', '4', 1],
         ['3', '5', 2]
-    }
+    )
 
     for i in carts:
         cart = Cart(user_id = i[0], item_id = i[1], quantity = i[2])

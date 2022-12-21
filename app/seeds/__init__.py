@@ -34,6 +34,7 @@ def seed():
     seed_reviews()
 
 
+
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
