@@ -1,0 +1,12 @@
+.display-product-container {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    padding: 50px;
+    flex-wrap: wrap;
+}
+
+.hp-product-img {
+    width: 230px;
+    height: 230px;
+}

@@ -40,5 +40,5 @@ class Product(db.Model):
             "Category": {
                 "id": self.category.id,
                 "categoryName": self.category.category_name,
-            },
+            }
         }
