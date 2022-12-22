@@ -51,7 +51,7 @@ def create_product():
 
 
 #edit the info of product in current user's product listings based on the product id
-@product_routes.route('/<int: productId>', methods=['PUT'])
+@product_routes.route('/<int:productId>', methods=['PUT'])
 @login_required
 def update_product(productId):
     product = Product.query.filter(id == productId).one()
@@ -84,7 +84,7 @@ def update_product(productId):
 
 
 # delete a product in current user's listings
-@product_routes.route('/<int: productId>', methods=['DELETE'])
+@product_routes.route('/<int:productId>', methods=['DELETE'])
 @login_required
 def delete_product(productId):
     product = Product.query.filter(id == productId).one()
