@@ -18,6 +18,11 @@ const LoginForm = () => {
     }
   };
 
+  const demoLogin = () => {
+    setEmail('demo@aa.io');
+    setPassword('password')
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -41,7 +46,7 @@ const LoginForm = () => {
         <label htmlFor='email'>Email</label>
         <input
           name='email'
-          type='text'
+          type='email'
           placeholder='Email'
           value={email}
           onChange={updateEmail}
@@ -57,6 +62,8 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <p>------- or --------</p>
+        <button id='demo-user-button' type='submit' onClick={() => demoLogin()}>Demo User</button>
       </div>
     </form>
   );

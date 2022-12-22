@@ -14,6 +14,26 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
+    const errorsArr = []
+    if (username.length > 39) {
+      errorsArr.push("Username must be less than 40 characters")
+    }
+    if (email.length > 254) {
+      errorsArr.push("Email length must be less than 255 characters")
+    }
+    if (password.length > 30) {
+      errorsArr.push("Password length must be less than 30 characters")
+    }
+    if (password !== repeatPassword){
+      errorsArr.push("Passwords do not match")
+    }
+
+    if (errorsArr.length) {
+      setErrors(errorsArr)
+      return;
+    }
+
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
@@ -61,7 +81,7 @@ const SignUpForm = () => {
       <div>
         <label>Email</label>
         <input
-          type='text'
+          type='email'
           name='email'
           onChange={updateEmail}
           value={email}
