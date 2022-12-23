@@ -33,7 +33,7 @@ function Homepage() {
                         <div className="category-name">Home & Living</div>
                     </div>
                     <div className="each-category-container">
-                        <img className="category-img" src="https://img.freepik.com/premium-photo/many-colorful-toys-collection-wooden-desk_488220-17409.jpg?w=900" alt='Toys & Entertainment'></img>
+                        <img className="category-img" src="https://www.panda-q.com/1985-large_default/baby-panda-toy-with-milk-bottle-55-cute-baby-panda-stuffed-animal.jpg" alt='Toys & Entertainment'></img>
                         <div className="category-name">Toys & Entertainment</div>
                     </div>
                     <div className="each-category-container">

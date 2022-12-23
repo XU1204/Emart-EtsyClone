@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct } from '../../store/product';
+import { updateProduct } from '../../store/product';
 import './createUpdateProduct.css'
 
-function CreateProduct ( ) {
+function UpdateProduct ({product} ) {
+    console.log('-------------------', product.id)
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
-    const [avalibility, setAvalibility] = useState(1)
-    const [categoryId, setCategoryId] = useState(1)
-    const [price, setPrice] = useState(0)
-    const [previewImage, setPreviewImage] = useState("")
+    const [name, setName] = useState(product.name)
+    const [description, setDescription] = useState(product.description)
+    const [avalibility, setAvalibility] = useState(product.avalibility)
+    const [categoryId, setCategoryId] = useState(product.categoryId)
+    const [price, setPrice] = useState(product.price)
+    const [previewImage, setPreviewImage] = useState(product.previewImage)
     const [errors, setErrors] = useState([]);
 
     // const user = useSelector(state => Object.values(state.session)[0])
@@ -27,6 +28,7 @@ function CreateProduct ( ) {
         previewImage,
         // sellerId: user.id
     }
+    console.log('1111111-----', payload)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +42,7 @@ function CreateProduct ( ) {
         if (name.trim().length === 0) errors.push('Name should not contain only spaces.')
         setErrors(errors)
 
-        return dispatch(createProduct(payload))
+        return dispatch(updateProduct(product.id, payload))
         .catch(async (res) => {
         const data = await res.json();
         if (data && typeof data.errors === 'object') {
@@ -49,24 +51,24 @@ function CreateProduct ( ) {
         if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
         else {
             setShowModal(false)
-            setAvalibility(1)
-            setName('')
-            setDescription('')
-            setCategoryId(1)
-            setPrice(0)
-            setPreviewImage('')
+            // setAvalibility(avalibility)
+            // setName(name)
+            // setDescription(description)
+            // setCategoryId(1)
+            // setPrice(0)
+            // setPreviewImage('')
         }
         });
     }
 
     return (
         <>
-            <button onClick={()=> setShowModal(true)} className="change-product-button"><i class="fa-solid fa-plus"></i> Add new product</button>
+            <button onClick={()=> setShowModal(true)} className="change-product-button"><i className="fa-solid fa-pen"></i></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <div className="create-product-container">
                     <form className="create-product" onSubmit={handleSubmit}>
-                        <h4>Create a new product</h4>
+                        <h4>Edit product</h4>
                         <ul className='error-ul'>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
@@ -128,4 +130,4 @@ function CreateProduct ( ) {
     )
 }
 
-export default CreateProduct;
+export default UpdateProduct;

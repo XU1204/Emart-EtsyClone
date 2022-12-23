@@ -18,7 +18,7 @@ function Product () {
         <div className="display-product-container">
             {allProducts.map(product => (
                 <div key={product.id} className='each-product-container'>
-                    <img className="hp-product-img" src={product.previewImage} alt={product.name}></img>
+                    <img className="hp-product-img" src={product.previewImage} alt={product.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
                     <div>
                         <p>{product.name.length > 47 ? product.name.substring(0, 46)+'...' : product.name}</p>
                         <p>★★★★★</p>
