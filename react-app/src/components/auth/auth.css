@@ -1,0 +1,13 @@
+#sign-out-button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+#sign-out-button:hover {
+    background-color: #d3d3d3;
+}
+
+#sign-out-button>i {
+    margin-right: 10px;
+}

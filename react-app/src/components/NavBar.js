@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 
 const NavBar = () => {
+    const history = useHistory();
+
     const [showMenu, setShowMenu] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
 
     const openMenu = () => {
       if (showMenu) return;
@@ -22,6 +25,11 @@ const NavBar = () => {
 
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
+
+    const handleChange = (e) => {
+      e.preventDefault();
+      setSearchInput(e.target.value);
+    };
 
     const user = useSelector(state => Object.values(state.session)[0])
 
@@ -44,12 +52,12 @@ const NavBar = () => {
     } else {
       content = (
         <div className='navbar-right'>
-            <div>
+            <div className='navbar-element'>
               <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/products/current' exact={true} activeClassName='active'>
                 <button className='navbar-button'><i class="fa-solid fa-store"></i></button>
               </NavLink>
             </div>
-            <div>
+            <div className='navbar-element'>
               <button className='navbar-button' onClick={openMenu}>
                 <i className="fa-solid fa-user"></i> {"  "}
                 <i class="fa-solid fa-caret-down"></i>
@@ -59,7 +67,7 @@ const NavBar = () => {
                   <li>{user.username}</li>
                   <li>{user.email}</li>
                   <li>
-                    <NavLink style={{ color: 'black'}} key='review' to='/'><i class="fa-regular fa-clipboard"></i>My Reviews</NavLink>
+                    <NavLink style={{ color: 'black'}} key='review' to='/'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
                   </li>
                   <li>
                     <LogoutButton />
@@ -67,7 +75,7 @@ const NavBar = () => {
                 </ul>
               )}
           </div>
-          <div>
+          <div className='navbar-element'>
             <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/sign-up' exact={true} activeClassName='active'>
               <button className='navbar-button'><i class="fa-solid fa-cart-shopping"></i></button>
             </NavLink>
@@ -80,10 +88,20 @@ const NavBar = () => {
   return (
     <nav>
       <div className='navbar-container'>
-        <div>
+        <div className='navbar-element'>
           <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/' exact={true} activeClassName='active'>
-            <p id='logo'>Emart</p>
+            <p id='logo'>Emarty</p>
           </NavLink>
+        </div>
+        <div id='search'>
+          <form action="/" method="GET" className="form">
+            <input
+              type="search"
+              placeholder="Search for anything"
+              onChange={handleChange}
+              value={searchInput} />
+            <button type="submit"  onClick={(e) => {e.preventDefault(); history.push('/coming-soon')}}><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
         </div>
         {content}
       </div>

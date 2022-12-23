@@ -48,6 +48,9 @@ function App() {
         <Route path='/' exact={true} >
           <Homepage />
         </Route>
+        <Route path='/coming-soon' exact={true} >
+          <h1>Feature coming soon!</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

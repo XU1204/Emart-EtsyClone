@@ -11,10 +11,9 @@
 }
 
 .hp-top {
-    background-color: #fdebd2;
-    margin: 0;
-    border-top: 2px solid rgba(237, 236, 236, 0.757);
-    background-size: 50% auto;
+    /* background-color: #fdebd2; */
+    background: linear-gradient(180deg, #fdebd2 70%, white 30%);
+    overflow: hidden;
 }
 
 .hp-top>p {
