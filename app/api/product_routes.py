@@ -37,10 +37,10 @@ def create_product():
             name = form.data['name'],
             description = form.data['description'],
             avalibility = form.data['avalibility'],
-            sellerId = form.data['sellerId'],
-            categoryId = form.data['category_id'],
+            seller_id = current_user.id,
+            category_id = form.data['categoryId'],
             price = form.data['price'],
-            previewImage = form.data['previewImage'],
+            preview_image = form.data['previewImage'],
         )
         db.session.add(new_product)
         db.session.commit()
@@ -54,7 +54,9 @@ def create_product():
 @product_routes.route('/<int:productId>', methods=['PUT'])
 @login_required
 def update_product(productId):
-    product = Product.query.filter(id == productId).one()
+    print("+++++++++++++++", productId)
+    product = Product.query.filter(Product.id == productId).one()
+
     if not product:
         return {'errors': f'Product {productId} not found!'}, 404
 
@@ -63,6 +65,7 @@ def update_product(productId):
 
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("+++++++++++++++", form.data)
 
     if form.validate_on_submit():
         new_product = Product(
@@ -70,10 +73,10 @@ def update_product(productId):
             name = form.data['name'],
             description = form.data['description'],
             avalibility = form.data['avalibility'],
-            sellerId = form.data['sellerId'],
-            categoryId = form.data['category_id'],
+            seller_id = current_user.id,
+            category_id = form.data['categoryId'],
             price = form.data['price'],
-            previewImage = form.data['previewImage'],
+            preview_image = form.data['previewImage'],
         )
         db.session.add(new_product)
         db.session.commit()
@@ -87,7 +90,7 @@ def update_product(productId):
 @product_routes.route('/<int:productId>', methods=['DELETE'])
 @login_required
 def delete_product(productId):
-    product = Product.query.filter(id == productId).one()
+    product = Product.query.filter(Product.id == productId).one()
     if not product:
         return {'errors': f'Product {productId} not found!'}, 404
 

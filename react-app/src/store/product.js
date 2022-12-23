@@ -47,8 +47,8 @@ export const getProductsOfCurrent = () => async dispatch => {
 };
 
 //create a product
-export const createProduct = (productId, payload) => async dispatch => {
-    const response = await fetch(`/api/products/${productId}`, {
+export const createProduct = (payload) => async dispatch => {
+    const response = await fetch(`/api/products`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -62,16 +62,17 @@ export const createProduct = (productId, payload) => async dispatch => {
     }
     else {
         const data = await response.json()
-        if(data.errors){
-            return data
-        }
+        // if(data.errors){
+        //     return data
+        // }
+        return data
     }
 }
 
 // update info of product
 export const updateProduct = (productId, payload) => async dispatch => {
     const response = await fetch(`/api/products/${productId}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
             },
