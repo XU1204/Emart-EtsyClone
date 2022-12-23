@@ -49,12 +49,20 @@ def create_product():
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+#GET details of each product
+@product_routes.route('/<int:productId>', methods=['GET'])
+@login_required
+def get_product_detail(productId):
+    product = Product.query.filter(Product.id == productId).one()
+    if not product:
+        return {'errors': f'Product {productId} not found!'}, 404
+    return product.to_dict(), 200
+
 
 #edit the info of product in current user's product listings based on the product id
 @product_routes.route('/<int:productId>', methods=['PUT'])
 @login_required
 def update_product(productId):
-    print("+++++++++++++++", productId)
     product = Product.query.filter(Product.id == productId).one()
 
     if not product:
@@ -65,23 +73,19 @@ def update_product(productId):
 
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("+++++++++++++++", form.data)
+
 
     if form.validate_on_submit():
-        new_product = Product(
-            id = productId,
-            name = form.data['name'],
-            description = form.data['description'],
-            avalibility = form.data['avalibility'],
-            seller_id = current_user.id,
-            category_id = form.data['categoryId'],
-            price = form.data['price'],
-            preview_image = form.data['previewImage'],
-        )
-        db.session.add(new_product)
-        db.session.commit()
+        product.name = form.name.data
+        product.description = form.data['description']
+        product.avalibility = form.data['avalibility']
+        product.category_id = form.data['categoryId']
+        product.price = form.data['price']
+        product.preview_image = form.data['previewImage']
 
-        return new_product.to_dict(), 200
+        db.session.add(product)
+        db.session.commit()
+        return product.to_dict(), 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

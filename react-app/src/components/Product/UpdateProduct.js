@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateProduct } from '../../store/product';
 import './createUpdateProduct.css'
 
 function UpdateProduct ({product} ) {
-    console.log('-------------------', product.id)
+    console.log('-------------------', typeof product.price)
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ function UpdateProduct ({product} ) {
         if (price <= 0) errors.push('Price nust be greater than 0.');
         if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
         if (description.length > 254) errors.push('Description must be less than 255 characters.')
-        if (name.length > 99) errors.push('Name must be less than 100 characters.')
+        if (name.length > 254) errors.push('Name must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
         if (name.trim().length === 0) errors.push('Name should not contain only spaces.')
         setErrors(errors)
@@ -51,12 +51,12 @@ function UpdateProduct ({product} ) {
         if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
         else {
             setShowModal(false)
-            // setAvalibility(avalibility)
-            // setName(name)
-            // setDescription(description)
-            // setCategoryId(1)
-            // setPrice(0)
-            // setPreviewImage('')
+            setAvalibility(avalibility)
+            setName(name)
+            setDescription(description)
+            setCategoryId(categoryId)
+            setPrice(price)
+            setPreviewImage(previewImage)
         }
         });
     }
@@ -92,7 +92,8 @@ function UpdateProduct ({product} ) {
                             placeholder="Avalibility"></input>
                         <div className="product-form-input">Price</div>
                         <input required
-                            type="number" min='0' step="0.01"
+                            type="number"
+                            // type="number" min='0' step="0.01"
                             onChange={(e) => setPrice(e.target.value)}
                             value={price}
                             placeholder="Price"></input>
