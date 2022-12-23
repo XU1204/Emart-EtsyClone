@@ -1,0 +1,4 @@
+.error-ul {
+    display: flex;
+    justify-content: flex-start;
+}

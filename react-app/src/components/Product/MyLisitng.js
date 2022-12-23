@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsOfCurrent } from "../../store/product";
+import { getProductsOfCurrent, removeProdcut } from "../../store/product";
+import CreateProduct from "./CreateProduct";
 import './product.css'
 
 const MyListing = () => {
@@ -28,6 +29,7 @@ const MyListing = () => {
                         <p>★★★★★</p>
                         <p>${Number(product.price).toFixed(2)}</p>
                     </div>
+                    <button onClick={() => dispatch(removeProdcut(product.id))}><i className="fa-solid fa-xmark"></i></button>
                 </div>
             ))}
         </div>
@@ -36,6 +38,10 @@ const MyListing = () => {
 
     return (
         <div>
+            <div id='shop-top-bar'>
+                <h2>Your Amazing Shop:</h2>
+                <CreateProduct />
+            </div>
             {content}
         </div>
     )
