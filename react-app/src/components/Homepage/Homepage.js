@@ -42,7 +42,7 @@ function Homepage() {
                     </div>
                 </div>
             </div>
-            <h2>Popular products right now</h2>
+            <h3>Popular products right now</h3>
             <Product />
         </div>
     )
