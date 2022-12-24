@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createProduct } from '../../store/product';
 import './createUpdateProduct.css'
 
@@ -35,7 +35,7 @@ function CreateProduct ( ) {
         if (price <= 0) errors.push('Price nust be greater than 0.');
         if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
         if (description.length > 254) errors.push('Description must be less than 255 characters.')
-        if (name.length > 99) errors.push('Name must be less than 100 characters.')
+        if (name.length > 254) errors.push('Name must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
         if (name.trim().length === 0) errors.push('Name should not contain only spaces.')
         setErrors(errors)
@@ -71,17 +71,21 @@ function CreateProduct ( ) {
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div className="product-form-input">Name</div>
-                        <input required
+                        <textarea required
                             type="text"
                             onChange={(e) => setName(e.target.value)}
                             value={name}
-                            placeholder="Name"></input>
+                            placeholder="Name"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div className="product-form-input">Description</div>
-                        <input required
+                        <textarea required
                             type="text"
                             onChange={(e) => setDescription(e.target.value)}
                             value={description}
-                            placeholder="Description"></input>
+                            placeholder="Description"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div className="product-form-input">Avalibility</div>
                         <input required
                             type="number" min='1'
@@ -112,11 +116,13 @@ function CreateProduct ( ) {
                         </select>
 
                         <div className="product-form-input">Preview Image</div>
-                        <input
+                        <textarea
                             type="text"
                             onChange={(e) => setPreviewImage(e.target.value)}
                             value={previewImage}
-                            placeholder="Preview Image Address"></input>
+                            placeholder="Preview Image Address"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div>
                             <button type="submit" className="change-product-button">Submit</button>
                         </div>

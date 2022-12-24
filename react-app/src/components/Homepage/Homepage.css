@@ -44,13 +44,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
 }
 
 .each-category-container:hover {
     color: grey;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+    /* text-decoration: underline;
+    text-decoration-thickness: 2px; */
     cursor: pointer;
+    border-bottom: 2px solid grey;
 }
 
 h3 {
