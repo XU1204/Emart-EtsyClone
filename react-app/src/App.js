@@ -46,9 +46,9 @@ function App() {
         <ProtectedRoute path='/products/current' exact={true} >
           <MyListing />
         </ProtectedRoute>
-        <ProtectedRoute path='/products/:productId' exact={true} >
+        <Route path='/products/:productId' exact={true} >
           <ProductDetail />
-        </ProtectedRoute>
+        </Route>
         <Route path='/' exact={true} >
           <Homepage />
         </Route>

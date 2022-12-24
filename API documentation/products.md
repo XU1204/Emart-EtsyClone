@@ -88,6 +88,47 @@ Return all of the current user's product listings
     }
     ```
 
+### Get the details of a product
+
+Return a product's details based on the product id
+
+* Require Authentication: False
+* Request
+  * Method: GET
+  * URL: /api/products/current
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+  ```json
+  {
+    "id": 1,
+    "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+    "description": "Infant Toy",
+    "avalibility": 10,
+    "sellerId": 1,
+    "categoryId": 5,
+    "price": 30.99,
+    "previewImage": "image url",
+    "Seller": {
+      "id": 1,
+      "username": "johndoe",
+      "email": "john@doe.com",
+    },
+    "Category": {
+      "id": 1,
+      "categoryName": "kids",
+    },
+    "createdAt": "2021-11-19 20:39:36",
+    "updatedAt": "2021-11-19 20:39:36"
+  }
+  ```
+
+
 ### Create a prodcuct listing
 
 Create and return a new product

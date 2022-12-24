@@ -51,7 +51,6 @@ def create_product():
 
 #GET details of each product
 @product_routes.route('/<int:productId>', methods=['GET'])
-@login_required
 def get_product_detail(productId):
     product = Product.query.filter(Product.id == productId).one()
     if not product:

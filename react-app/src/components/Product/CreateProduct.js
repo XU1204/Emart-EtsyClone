@@ -71,17 +71,21 @@ function CreateProduct ( ) {
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
                         <div className="product-form-input">Name</div>
-                        <input required
+                        <textarea required
                             type="text"
                             onChange={(e) => setName(e.target.value)}
                             value={name}
-                            placeholder="Name"></input>
+                            placeholder="Name"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div className="product-form-input">Description</div>
-                        <input required
+                        <textarea required
                             type="text"
                             onChange={(e) => setDescription(e.target.value)}
                             value={description}
-                            placeholder="Description"></input>
+                            placeholder="Description"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div className="product-form-input">Avalibility</div>
                         <input required
                             type="number" min='1'
@@ -112,11 +116,13 @@ function CreateProduct ( ) {
                         </select>
 
                         <div className="product-form-input">Preview Image</div>
-                        <input
+                        <textarea
                             type="text"
                             onChange={(e) => setPreviewImage(e.target.value)}
                             value={previewImage}
-                            placeholder="Preview Image Address"></input>
+                            placeholder="Preview Image Address"
+                            style={{resize: 'none'}}>
+                        </textarea>
                         <div>
                             <button type="submit" className="change-product-button">Submit</button>
                         </div>
