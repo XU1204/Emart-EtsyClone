@@ -101,7 +101,7 @@ export const removeProdcut = (productId) => async dispatch => {
     }
 }
 
-
+// Reducer
 export default function productReducer(state = {}, action) {
     let newState;
     switch (action.type) {

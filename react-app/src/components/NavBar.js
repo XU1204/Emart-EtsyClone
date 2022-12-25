@@ -76,7 +76,7 @@ const NavBar = () => {
               )}
           </div>
           <div className='navbar-element'>
-            <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/sign-up' exact={true} activeClassName='active'>
+            <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/carts' exact={true} activeClassName='active'>
               <button className='navbar-button'><i class="fa-solid fa-cart-shopping"></i></button>
             </NavLink>
           </div>
