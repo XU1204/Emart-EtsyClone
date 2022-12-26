@@ -13,6 +13,13 @@
     row-gap: 1vh;
 }
 
+.product-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 15px 0 0;
+}
+
 .hp-product-img {
     width: 100%;
     height: 60%;
@@ -43,4 +50,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.star {
+    margin: 10px 0 0;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    gap:5px;
 }

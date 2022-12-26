@@ -28,9 +28,9 @@ const MyListing = () => {
                         <div key={product.id} className='each-product-container'>
                             <NavLink key={product.id} to={`/products/${product.id}`} style={{ color: 'black', textDecoration: 'none'}}>
                             <img className="hp-product-img" src={product.previewImage} alt={product.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
-                            <div className="">
-                                <p>{product.name.length > 39 ? product.name.substring(0, 38)+'...' : product.name}</p>
-                                <p>★★★★★</p>
+                            <div className="product-details">
+                                <p className="product-name">{product.name}</p>
+                                <p className="star">★★★★★</p>
                                 <div id='price-pen-cross'>
                                     <p>${Number(product.price).toFixed(2)}</p>
                                     <div>
