@@ -42,8 +42,10 @@ function Homepage() {
                     </div>
                 </div>
             </div>
-            <h3>Popular products right now</h3>
-            <Product />
+            <div id='popular-product-wrapper'>
+                <h3>Popular products right now</h3>
+                <Product />
+            </div>
         </div>
     )
 }

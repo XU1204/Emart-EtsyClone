@@ -105,7 +105,7 @@ function CreateProduct ( ) {
                             onChange={(e) => setCategoryId(e.target.value)}
                             value={categoryId}
                         >
-                            <option value='' >
+                            <option value='' disabled>
                                 Select a Category...
                             </option>
                             <option value='1'>Jewelry & Accessories</option>
