@@ -79,11 +79,15 @@ export const updateCart = (cartId, payload) => async dispatch => {
 
 // delete a cart
 export const removeCart = (cartId) => async dispatch => {
-    const response = await fetch(`/api/products/${cartId}`, {
+    const response = await fetch(`/api/carts/${cartId}`, {
         method: 'DELETE',
     })
     if (response.ok) {
         dispatch(remove(cartId))
+    }
+    else {
+        const data = await response.json()
+        return data;
     }
 }
 
