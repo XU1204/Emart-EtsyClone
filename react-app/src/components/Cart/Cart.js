@@ -22,12 +22,12 @@ function MyCart () {
             <h3>{number} items in your cart</h3>
             <div><i class="fa-solid fa-handshake-simple"></i>Earty Purchase Protection: Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
             {carts.map(cart => (
-                <div className='each-product-container'>
+                <div className='cart-product-container'>
                     <div><i class="fa-regular fa-gem"></i>Fancy Store</div>
                     <div className="each-cart-container">
-                        <div className="hp-img-container">
+                        <div className="cart-img-container">
                             <NavLink key={cart.id} to={`/products/${cart.item_id}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                <img className="hp-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
+                                <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
                             </NavLink>
                         </div>
                         <div>

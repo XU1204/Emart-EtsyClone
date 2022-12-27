@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../store/product";
+import CreateCart from "../Cart/CreateCart";
 import './product.css'
 
 
@@ -19,8 +20,9 @@ function ProductDetail () {
 
     return (
         <>
-        <h1>detail</h1>
-        <img src={product.previewImage}></img>
+            <h1>detail</h1>
+            <img src={product.previewImage}></img>
+            <CreateCart product={product} />
         </>
     )
 }
