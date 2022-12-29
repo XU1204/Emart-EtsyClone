@@ -15,6 +15,7 @@ function MyCart () {
     const carts = useSelector(state => Object.values(state.carts))
     if (!carts) return null;
     const number = carts.length
+    const total = carts.reduce((totalPrice, cart) => totalPrice + cart.price, 0)
 
     let content;
     if (carts.length === 0) {
