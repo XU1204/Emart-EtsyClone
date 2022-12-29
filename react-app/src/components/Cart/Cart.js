@@ -65,7 +65,16 @@ function MyCart () {
                         ))}
                     </div>
                     <div>
-                        right part-checkout
+                        <div>
+                            Item(s) total:
+                        </div>
+                        <div>
+                            Shop discount:
+                        </div>
+                        <div>
+                            subtotal:
+                        </div>
+                        <button>Proceed to checkout</button>
                     </div>
                 </div>
             </div>
