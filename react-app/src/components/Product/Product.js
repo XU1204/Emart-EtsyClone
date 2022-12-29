@@ -24,7 +24,7 @@ function Product () {
                         <img className="hp-product-img" src={product.previewImage} alt={product.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
                         <div>
                             <p className="product-name">{product.name}</p>
-                            <p>★★★★★</p>
+                            <p className="star">★★★★★</p>
                             <p>${Number(product.price).toFixed(2)}</p>
                         </div>
                     </div>
