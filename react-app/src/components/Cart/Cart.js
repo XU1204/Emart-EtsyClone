@@ -15,7 +15,7 @@ function MyCart () {
     const carts = useSelector(state => Object.values(state.carts))
     if (!carts) return null;
     const number = carts.length
-    const total = carts.reduce((totalPrice, cart) => totalPrice + cart.price, 0)
+    const total = carts.reduce((totalPrice, cart) => totalPrice + cart.Item.price * cart.quantity, 0)
 
     let content;
     if (carts.length === 0) {
@@ -66,7 +66,16 @@ function MyCart () {
                         ))}
                     </div>
                     <div>
-                        right part-checkout
+                        <div className="checkout-line">
+                            <span>Item(s) total:</span><span>${total.toFixed(2)}</span>
+                        </div>
+                        <div  className="checkout-line">
+                            <span>Shop discount:</span><span>-$0.00</span>
+                        </div>
+                        <div className="checkout-line">
+                            <span>subtotal:</span> <span>${total.toFixed(2)}</span>
+                        </div>
+                        <button>Proceed to checkout</button>
                     </div>
                 </div>
             </div>
@@ -74,10 +83,9 @@ function MyCart () {
     }
 
     return (
-        <div>
+        <div id='cart-page-container'>
             {content}
-            <div><i class="fa-brands fa-pagelines"></i>Earty offsets carbon emissions from every delivery</div>
-            <div>Footer part-developer info</div>
+            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>Earty offsets carbon emissions from every delivery</div>
         </div>
     )
 }
