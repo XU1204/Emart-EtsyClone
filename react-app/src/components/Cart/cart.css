@@ -1,0 +1,10 @@
+.cart-product-img {
+    height: 180px;
+    width: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cart-middle-container {
+    display: flex;
+}
