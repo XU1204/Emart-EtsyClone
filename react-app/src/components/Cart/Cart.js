@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { getCarts, removeCart } from "../../store/cart";
 import UpdateCart from "./UpdateCart";
 import './cart.css'
+import handshake from '../../assets/handshake.png'
 
 function MyCart () {
     const dispatch = useDispatch()
@@ -20,8 +21,8 @@ function MyCart () {
     let content;
     if (carts.length === 0) {
         content = (
-            <div>
-                <div><i class="fa-solid fa-handshake-simple"></i>Earty Purchase Protection: Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
+            <div className="cart-content-container">
+                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Earty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
                 <div>
                     You cart is empty.
                 </div>
@@ -32,28 +33,32 @@ function MyCart () {
         )
     } else {
         content = (
-            <div>
-                <h3>{number} items in your cart</h3>
-                <NavLink to='' style={{ color: 'black', textDecoration: 'none'}}>
-                    <button>Keep shopping</button>
-                </NavLink>
-                <div><i class="fa-solid fa-handshake-simple"></i>Earty Purchase Protection: Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
+            <div className="cart-content-container">
+                <div className="cart-top-line">
+                    <h3>{number} {number > 1 ? 'items':'item'} in your cart</h3>
+                    <NavLink to='' style={{ color: 'black', textDecoration: 'none'}}>
+                        <button id='keep-shopping'>Keep shopping</button>
+                    </NavLink>
+                </div>
+                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Earty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
                 <div className="cart-middle-container">
                     <div>
                         {carts.map(cart => (
                             <div className='cart-product-container'>
-                                <div><i class="fa-regular fa-gem"></i>Fancy Store</div>
-                                <div className="each-cart-container">
-                                    <div className="cart-img-container">
-                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                            <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
-                                        </NavLink>
-                                    </div>
-                                    <div>
-                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                            {cart.Item.name}
-                                        </NavLink>
-                                        <button onClick={() => dispatch(removeCart(cart.id))} className="change-product-button">Remove</button>
+                                <div id='shop-name'><i class="fa-regular fa-gem"></i>&nbsp;Fancy Store</div>
+                                <div className="each-cart-middle-container">
+                                    <div className="each-cart-middle-container">
+                                        <div className="cart-img-container">
+                                            <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                                <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
+                                            </NavLink>
+                                        </div>
+                                        <div id='cart-name-remove'>
+                                            <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                                {cart.Item.name}
+                                            </NavLink>
+                                            <button onClick={() => dispatch(removeCart(cart.id))} className="change-product-button">Remove</button>
+                                        </div>
                                     </div>
                                     <div>
                                         <UpdateCart cart={cart} />
@@ -65,14 +70,15 @@ function MyCart () {
                             </div>
                         ))}
                     </div>
-                    <div>
+                    <div className="checkout-container">
+                        <h4>Hello, you will pay:</h4>
                         <div className="checkout-line">
                             <span>Item(s) total:</span><span>${total.toFixed(2)}</span>
                         </div>
                         <div  className="checkout-line">
                             <span>Shop discount:</span><span>-$0.00</span>
                         </div>
-                        <div className="checkout-line">
+                        <div className="checkout-line" id='subtotal'>
                             <span>subtotal:</span> <span>${total.toFixed(2)}</span>
                         </div>
                         <button>Proceed to checkout</button>
