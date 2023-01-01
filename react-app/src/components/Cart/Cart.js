@@ -45,12 +45,12 @@ function MyCart () {
                                 <div><i class="fa-regular fa-gem"></i>Fancy Store</div>
                                 <div className="each-cart-container">
                                     <div className="cart-img-container">
-                                        <NavLink key={cart.id} to={`/products/${cart.item_id}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
                                             <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
                                         </NavLink>
                                     </div>
                                     <div>
-                                        <NavLink key={cart.id} to={`/products/${cart.item_id}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
                                             {cart.Item.name}
                                         </NavLink>
                                         <button onClick={() => dispatch(removeCart(cart.id))} className="change-product-button">Remove</button>
