@@ -18,7 +18,7 @@ function UpdateCart({cart}) {
     }, [quantity])
 
     return (
-        <div>
+        <div id='update-cart-container'>
             <select
                 name='quantity'
                 onChange={(e) => setQuantity(e.target.value)}

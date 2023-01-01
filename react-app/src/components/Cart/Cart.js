@@ -73,15 +73,18 @@ function MyCart () {
                     <div className="checkout-container">
                         <h4>Hello, you will pay:</h4>
                         <div className="checkout-line">
-                            <span>Item(s) total:</span><span>${total.toFixed(2)}</span>
+                            <span className="checkout-bold-txt">Item(s) total</span><span>${total.toFixed(2)}</span>
                         </div>
                         <div  className="checkout-line">
-                            <span>Shop discount:</span><span>-$0.00</span>
+                            <span className="checkout-bold-txt">Shop discount</span><span>-$0.00</span>
                         </div>
                         <div className="checkout-line" id='subtotal'>
-                            <span>subtotal:</span> <span>${total.toFixed(2)}</span>
+                            <span>Subtotal</span> <span>${total.toFixed(2)}</span>
                         </div>
-                        <button>Proceed to checkout</button>
+                        <div  className="checkout-line">
+                            <span>Shipping</span><span id='free-txt'>FREE</span>
+                        </div>
+                        <button id='checkout-button'>Proceed to checkout</button>
                     </div>
                 </div>
             </div>
@@ -91,7 +94,7 @@ function MyCart () {
     return (
         <div id='cart-page-container'>
             {content}
-            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>Earty offsets carbon emissions from every delivery</div>
+            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>&nbsp;Earty offsets carbon emissions from every delivery</div>
         </div>
     )
 }
