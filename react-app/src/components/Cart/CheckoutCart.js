@@ -4,7 +4,6 @@ import flag from '../../assets/flag.png'
 
 function CheckoutCart() {
     const user = useSelector(state => Object.values(state.session)[0])
-    console.log("+++++++++++", user)
 
     return (
         <div id='order-palced-container'>
