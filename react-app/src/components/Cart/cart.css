@@ -178,5 +178,5 @@
 }
 
 #cart-page-container {
-    height: 72vh;
+    min-height: 72vh;
 }

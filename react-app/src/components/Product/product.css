@@ -29,7 +29,7 @@
 }
 
 .each-product-container {
-    height: 340px;
+    height: 350px;
     border: none;
     padding: 0 10px 0;
     border-radius: 10px;
@@ -61,6 +61,23 @@
 .product-details {
     display: flex;
     flex-direction: column;
-    height: 140px;
     gap:5px;
+}
+
+/* to display two elements in one line */
+#my-lst-price {
+    display: inline-block;
+    margin-right: 140px;
+}
+#pen-cross {
+    display: inline-block;
+}
+
+#my-list-wrapper{
+    min-height: 76vh;
+}
+
+#no-lst-yet {
+    text-align: center;
+    font-size: 32px;
 }

@@ -16,9 +16,9 @@ const MyListing = () => {
     const products = useSelector(state => Object.values(state.products))
 
     let content;
-    if (!products) {
+    if (products.length === 0) {
         content = (
-            <div>Your have no product listings yet!</div>
+            <div id='no-lst-yet'>Your have no product listings yet!</div>
         )
     } else {
         content = (
@@ -31,15 +31,13 @@ const MyListing = () => {
                             <div className="product-details">
                                 <p className="product-name">{product.name}</p>
                                 <p className="star">★★★★★</p>
-                                <div id='price-pen-cross'>
-                                    <p>${Number(product.price).toFixed(2)}</p>
-                                    <div>
-                                        <UpdateProduct product={product} />
-                                        <button onClick={() => dispatch(removeProdcut(product.id))} className="change-product-button"><i className="fa-solid fa-xmark"></i></button>
-                                    </div>
-                                </div>
                             </div>
+                            <p id='my-lst-price'>${Number(product.price).toFixed(2)}</p>
                             </NavLink>
+                            <div id='pen-cross'>
+                                <UpdateProduct product={product} />
+                                <button onClick={() => dispatch(removeProdcut(product.id))} className="change-product-button"><i className="fa-solid fa-xmark"></i></button>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -48,7 +46,7 @@ const MyListing = () => {
     }
 
     return (
-        <div>
+        <div id='my-list-wrapper'>
             <div id='shop-top-bar'>
                 <h2>Your Amazing Shop:</h2>
                 <CreateProduct />
