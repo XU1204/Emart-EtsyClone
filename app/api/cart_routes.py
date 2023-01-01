@@ -82,3 +82,19 @@ def delete_product(cartId):
     db.session.delete(item)
     db.session.commit()
     return {'message': f'Sucessfully deleted item:{item.item.name} in your cart.'}, 200
+
+
+# checkout(delete) all items in the shopping cart
+@cart_routes.route('', methods=['DELETE'])
+@login_required
+def checkout_cart():
+    carts = Cart.query.options(joinedload(Cart.user), joinedload(Cart.item)).filter(Cart.user_id == current_user.id).all()
+
+    if not carts:
+        return {'errors': 'Couldn\'t check out your cart since your cart is empty!'}, 404
+
+    for cart in carts:
+        db.session.delete(cart)
+        db.session.commit()
+
+    return {'message': 'Sucessfully checked out your cart.'}, 200

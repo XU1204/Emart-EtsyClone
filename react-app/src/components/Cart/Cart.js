@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getCarts, removeCart } from "../../store/cart";
+import { NavLink, useHistory } from "react-router-dom";
+import { getCarts, removeCart, checkoutCart } from "../../store/cart";
 import UpdateCart from "./UpdateCart";
 import './cart.css'
 import handshake from '../../assets/handshake.png'
 
 function MyCart () {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(getCarts())
@@ -17,6 +18,11 @@ function MyCart () {
     if (!carts) return null;
     const number = carts.length
     const total = carts.reduce((totalPrice, cart) => totalPrice + cart.Item.price * cart.quantity, 0)
+
+    const changePath = () => {
+        dispatch(checkoutCart())
+        history.push('/carts/checkout')
+    }
 
     let content;
     if (carts.length === 0) {
@@ -84,7 +90,7 @@ function MyCart () {
                         <div  className="checkout-line">
                             <span>Shipping</span><span id='free-txt'>FREE</span>
                         </div>
-                        <button id='checkout-button'>Proceed to checkout</button>
+                        <button id='checkout-button' onClick={changePath}>Proceed to checkout</button>
                     </div>
                 </div>
             </div>

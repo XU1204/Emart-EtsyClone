@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { createCart, updateCart } from '../../store/cart';
-import { useEffect } from 'react';
 import './cart.css'
 import { useHistory } from 'react-router-dom';
 

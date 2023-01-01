@@ -180,3 +180,17 @@
 #cart-page-container {
     min-height: 72vh;
 }
+
+#order-palced-container {
+    text-align: center;
+    min-height: 72vh;
+    padding-top: 50px;
+}
+
+#order-palced-container>img {
+    height: 200px;
+}
+
+#order-palced-container>h1{
+    font-weight: 100;
+}

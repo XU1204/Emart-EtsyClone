@@ -12,8 +12,10 @@ import Homepage from './components/Homepage/Homepage';
 import MyListing from './components/Product/MyLisitng';
 import ProductDetail from './components/Product/ProductDetails';
 import MyCart from './components/Cart/Cart';
+import CheckoutCart from './components/Cart/CheckoutCart';
 import Footer from './components/Footer/Footer';
 import './index.css'
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,6 +57,9 @@ function App() {
             </Route>
             <ProtectedRoute path='/carts' exact={true} >
               <MyCart />
+            </ProtectedRoute>
+            <ProtectedRoute path='/carts/checkout' exact={true} >
+              <CheckoutCart />
             </ProtectedRoute>
             <Route path='/' exact={true} >
               <Homepage />
