@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import Product from "../Product/Product";
 import './Homepage.css'
+import github from '../../assets/github.png'
+import linkedin from '../../assets/linkedin.png'
 
 function Homepage() {
     const user = useSelector(state => Object.values(state.session)[0])

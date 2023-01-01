@@ -15,6 +15,7 @@ function MyCart () {
     const carts = useSelector(state => Object.values(state.carts))
     if (!carts) return null;
     const number = carts.length
+    const total = carts.reduce((totalPrice, cart) => totalPrice + cart.Item.price * cart.quantity, 0)
 
     let content;
     if (carts.length === 0) {
@@ -44,12 +45,12 @@ function MyCart () {
                                 <div><i class="fa-regular fa-gem"></i>Fancy Store</div>
                                 <div className="each-cart-container">
                                     <div className="cart-img-container">
-                                        <NavLink key={cart.id} to={`/products/${cart.item_id}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
                                             <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
                                         </NavLink>
                                     </div>
                                     <div>
-                                        <NavLink key={cart.id} to={`/products/${cart.item_id}`} style={{ color: 'black', textDecoration: 'none'}}>
+                                        <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
                                             {cart.Item.name}
                                         </NavLink>
                                         <button onClick={() => dispatch(removeCart(cart.id))} className="change-product-button">Remove</button>
@@ -65,14 +66,14 @@ function MyCart () {
                         ))}
                     </div>
                     <div>
-                        <div>
-                            Item(s) total:
+                        <div className="checkout-line">
+                            <span>Item(s) total:</span><span>${total.toFixed(2)}</span>
                         </div>
-                        <div>
-                            Shop discount:
+                        <div  className="checkout-line">
+                            <span>Shop discount:</span><span>-$0.00</span>
                         </div>
-                        <div>
-                            subtotal:
+                        <div className="checkout-line">
+                            <span>subtotal:</span> <span>${total.toFixed(2)}</span>
                         </div>
                         <button>Proceed to checkout</button>
                     </div>
@@ -82,10 +83,9 @@ function MyCart () {
     }
 
     return (
-        <div>
+        <div id='cart-page-container'>
             {content}
-            <div><i class="fa-brands fa-pagelines"></i>Earty offsets carbon emissions from every delivery</div>
-            <div>Footer part-developer info</div>
+            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>Earty offsets carbon emissions from every delivery</div>
         </div>
     )
 }

@@ -15,7 +15,7 @@ def get_cart ():
      return {'Carts': [cart.to_dict() for cart in carts]}, 200
 
 
-# get caertain item's info in cart
+# get certain item's info in cart
 @cart_routes.route('<int:cartId>', methods=['GET'])
 @login_required
 def get_item(cartId):
