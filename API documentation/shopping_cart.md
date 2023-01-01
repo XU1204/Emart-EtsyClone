@@ -150,6 +150,7 @@ Add and return a new item
     }
     ```
 
+
 ### Edit quantity of items in shopping cart
 
 Update an exisitng product.
@@ -213,6 +214,7 @@ Update an exisitng product.
     }
     ```
 
+
 ### Delete an item in shopping cart
 
 Delete an existing product listing
@@ -247,5 +249,30 @@ Delete an existing product listing
     {
       "message": "Product not found.",
       "statusCode": 404
+    }
+    ```
+
+
+### Checkout shopping cart
+
+Clear all items inside shopping cart
+
+* Require Authentication: true
+* Require proper authorization: Product must belong to the current user.
+* Request
+  * Method: DELETE
+  * URL: /api/carts
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "message": "Successfully deleted",
+      "statusCode": 200
     }
     ```

@@ -3,6 +3,7 @@ const LOAD = 'carts/GET'
 const CREATE = 'carts/CREATE'
 const UPDATE = 'carts/UPDATE'
 const REMOVE = 'carts/REMOVE'
+const CHECKOUT = 'carts/CHECKOUT'
 
 // action creators
 const load = (carts) => ({
@@ -23,6 +24,10 @@ const update = (cart) => ({
 const remove = (cartId) => ({
     type: REMOVE,
     cartId
+})
+
+const checkout = () => ({
+    type: CHECKOUT
 })
 
 // thunk
@@ -91,6 +96,20 @@ export const removeCart = (cartId) => async dispatch => {
     }
 }
 
+// checkout cart
+export const checkoutCart = () => async dispatch => {
+    const response = await fetch('/api/carts', {
+        method:'DELETE',
+    })
+    if (response.ok) {
+        dispatch(checkout())
+    }
+    else {
+        const data = await response.json()
+        return data;
+    }
+}
+
 
 // Reducer
 export default function cartReducer(state = {}, action) {
@@ -108,6 +127,8 @@ export default function cartReducer(state = {}, action) {
             newState = {...state};
             delete newState[action.cartId];
             return newState;
+        case CHECKOUT:
+            return {};
         default:
         return state;
     }

@@ -12,8 +12,10 @@ import Homepage from './components/Homepage/Homepage';
 import MyListing from './components/Product/MyLisitng';
 import ProductDetail from './components/Product/ProductDetails';
 import MyCart from './components/Cart/Cart';
+import CheckoutCart from './components/Cart/CheckoutCart';
 import Footer from './components/Footer/Footer';
 import './index.css'
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +34,7 @@ function App() {
 
   return (
       <BrowserRouter>
-      <div className='page-container'>
+        <div className='page-container'>
           <NavBar />
           <Switch>
             <Route path='/login' exact={true}>
@@ -56,16 +58,19 @@ function App() {
             <ProtectedRoute path='/carts' exact={true} >
               <MyCart />
             </ProtectedRoute>
+            <ProtectedRoute path='/carts/checkout' exact={true} >
+              <CheckoutCart />
+            </ProtectedRoute>
             <Route path='/' exact={true} >
               <Homepage />
             </Route>
             <Route path='/coming-soon' exact={true} >
-              <h1>Feature coming soon!</h1>
+              <h1 id='coming-soon'>Feature coming soon! <i class="fa-regular fa-face-smile"></i></h1>
             </Route>
           </Switch>
           <Footer />
-          </div>
-        </BrowserRouter>
+        </div>
+      </BrowserRouter>
   );
 }
 
