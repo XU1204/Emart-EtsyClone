@@ -32,7 +32,7 @@ function App() {
 
   return (
       <BrowserRouter>
-      <div className='page-container'>
+        <div className='page-container'>
           <NavBar />
           <Switch>
             <Route path='/login' exact={true}>
@@ -60,12 +60,12 @@ function App() {
               <Homepage />
             </Route>
             <Route path='/coming-soon' exact={true} >
-              <h1>Feature coming soon!</h1>
+              <h1 id='coming-soon'>Feature coming soon! <i class="fa-regular fa-face-smile"></i></h1>
             </Route>
           </Switch>
           <Footer />
-          </div>
-        </BrowserRouter>
+        </div>
+      </BrowserRouter>
   );
 }
 

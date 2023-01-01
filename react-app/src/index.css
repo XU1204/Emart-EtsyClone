@@ -8,3 +8,8 @@ body {
     min-height: 100%;
     padding-bottom: 8rem;
 }
+
+#coming-soon {
+    height: 72vh;
+    text-align: center;
+}

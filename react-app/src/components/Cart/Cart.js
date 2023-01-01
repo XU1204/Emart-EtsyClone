@@ -21,13 +21,13 @@ function MyCart () {
     let content;
     if (carts.length === 0) {
         content = (
-            <div className="cart-content-container">
+            <div className="empty-cart-container">
                 <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Earty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
-                <div>
+                <div id='cart-empty-txt'>
                     You cart is empty.
                 </div>
-                <NavLink to='' style={{ color: 'black'}}>
-                    <button>Discover something unique to fill it up</button>
+                <NavLink to='' id='navlink'>
+                    <span id='discover-txt'>Discover something unique to fill it up</span>
                 </NavLink>
             </div>
         )
