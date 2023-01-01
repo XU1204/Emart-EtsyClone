@@ -8,3 +8,9 @@
 .cart-middle-container {
     display: flex;
 }
+
+.checkout-line {
+    display: flex;
+    justify-content: space-between;
+}
+
