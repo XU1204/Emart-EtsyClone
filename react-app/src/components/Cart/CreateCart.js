@@ -17,15 +17,15 @@ function CreateCart({product, isExist}) {
             itemId: product.id,
             quantity
         }
-        const payload2 = {
-            quantity: isExist.quantity + quantity
-        }
 
         // if the item is not in your cart, then add this new item to your cart
         if (!isExist) {
             await dispatch(createCart(payload))
         // if the item is already in your cart, just update the quantity
         } else {
+            const payload2 = {
+                quantity: isExist.quantity + quantity
+            }
             await dispatch(updateCart(isExist.id, payload2))
         }
 
