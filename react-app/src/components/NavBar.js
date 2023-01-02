@@ -64,8 +64,8 @@ const NavBar = () => {
               </button>
               {showMenu && (
                 <ul className="profile-dropdown">
-                  <li>{user.username}</li>
-                  <li>{user.email}</li>
+                  <li><i class="fa-solid fa-user"></i>{user.username}</li>
+                  <li><i class="fa-solid fa-envelope"></i>{user.email}</li>
                   <li>
                     <NavLink style={{ color: 'black'}} key='review' to='/'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
                   </li>
