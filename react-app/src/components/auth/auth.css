@@ -2,6 +2,7 @@
     border: none;
     background-color: white;
     cursor: pointer;
+    margin: 0;
 }
 
 #sign-out-button:hover {
@@ -9,5 +10,5 @@
 }
 
 #sign-out-button>i {
-    margin-right: 10px;
+    margin-right: 8px;
 }

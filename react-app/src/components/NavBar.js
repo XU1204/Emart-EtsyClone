@@ -64,12 +64,12 @@ const NavBar = () => {
               </button>
               {showMenu && (
                 <ul className="profile-dropdown">
-                  <li><i class="fa-solid fa-user"></i>{user.username}</li>
-                  <li><i class="fa-solid fa-envelope"></i>{user.email}</li>
-                  <li>
+                  <li className='dropdown-txt'><i class="fa-solid fa-user">&nbsp;&nbsp;</i>{user.username}</li>
+                  <li className='dropdown-txt'><i class="fa-solid fa-envelope">&nbsp;&nbsp;</i>{user.email}</li>
+                  <li className='dropdown-txt'>
                     <NavLink style={{ color: 'black'}} key='review' to='/'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
                   </li>
-                  <li>
+                  <li id='dropdown-signout'>
                     <LogoutButton />
                   </li>
                 </ul>
