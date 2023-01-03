@@ -13,7 +13,7 @@
     margin-right: 8px;
 }
 
-/* LoginForm.js */
+/* LoginForm.js & SignUpForm.js*/
 .login-container {
     padding: 30px;
     width: 300px;
@@ -31,4 +31,64 @@
 #login-form-term {
     text-align: start;
     font-size: 14px;
+    color: grey;
+}
+
+.login-form-input {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.login-form-input>input {
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 2px #eeeeee;
+}
+.login-form-input>input:hover {
+    border: 1px solid rgba(128, 128, 128, 0.889);
+}
+
+#login-button {
+    color: white;
+    font-size: 18px;
+    background-color: #222222;
+    width: 100%;
+    border: none;
+    border-radius: 25px;
+    margin: 20px auto;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.5s all ease-in-out;
+}
+#login-button:hover{
+    scale: 1.02;
+    background-color: #222222dc;
+}
+
+#demo-user-button {
+    border: 2px solid black;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 25px;
+    margin: 20px auto;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.5s all ease-in-out;
+}
+#demo-user-button:hover {
+    scale: 1.02;
+}
+
+#registration-txt {
+    margin-bottom: 20px;
+    font-weight:light;
+}
+
+.asterisk {
+    color: red;
 }

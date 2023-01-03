@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
+import SignUpForm from './auth/SignUpForm';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -44,11 +45,12 @@ const NavBar = () => {
               </NavLink>
             </div> */}
             <LoginForm />
-            <div>
+            {/* <div>
               <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/sign-up' exact={true} activeClassName='active'>
                 <button className='navbar-button'>Sign Up</button>
               </NavLink>
-              </div>
+            </div> */}
+            <SignUpForm />
           </div>
         )
     } else {
