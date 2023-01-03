@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createCart, updateCart } from '../../store/cart';
-import './cart.css'
+import '../Product/productDetails.css'
 import { useHistory } from 'react-router-dom';
 
 function CreateCart({product, isExist}) {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const user = useSelector(state => Object.values(state.session)[0])
+
     const [quantity, setQuantity] = useState(1)
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+
+        if (!user) window.alert('Please sign in to add to cart!')
+
         const payload = {
             itemId: product.id,
             quantity
@@ -31,9 +36,10 @@ function CreateCart({product, isExist}) {
         history.push('/carts')
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <div>Quantity</div>
+        <form id='detail-form' onSubmit={handleSubmit}>
+            <div id='select-quantity-txt'>Select the quantity{' '}<span className='asterisk'>*</span></div>
             <select
+                id='select-quantity'
                 name='quantity'
                 onChange={(e) => setQuantity(e.target.value)}
                 value={quantity}
@@ -47,7 +53,7 @@ function CreateCart({product, isExist}) {
                         {num}</option>
                 ))}
             </select>
-            <button type='submit'>Add to cart</button>
+            <button id='add-cart-button' type='submit'>Add to cart</button>
         </form>
     )
     }

@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "../../store/product";
 import { getCarts } from "../../store/cart";
 import CreateCart from "../Cart/CreateCart";
-import './product.css'
+import './productDetails.css'
+import cart from '../../assets/cart.png'
+import truck from '../../assets/truck.png'
 
 
 function ProductDetail () {
@@ -19,6 +21,7 @@ function ProductDetail () {
     const allProducts = useSelector(state => Object.values(state.products))
     const product = allProducts.find(product => product.id === +productId)
     const carts = useSelector(state => Object.values(state.carts))
+
     if(!product) return null
     if (!carts) return null;
 
@@ -26,11 +29,26 @@ function ProductDetail () {
 
 
     return (
-        <>
-            <h1>detail</h1>
-            <img src={product.previewImage}></img>
-            <CreateCart product={product} isExist={isExist}/>
-        </>
+        <div className="detail-cantainer">
+            <div className="detail-left-container">
+                <img src={product.previewImage}></img>
+            </div>
+            <div className="detail-right-container">
+                <p id='detail-name'>{product.name}</p>
+                <div id='detail-price'>${product.price.toFixed(2)}</div>
+                <CreateCart product={product} isExist={isExist}/>
+                <div className="detail-small-img-txt">
+                    <img src={cart} alt='cart'></img>
+                    <p><span style={{fontWeight: 'bold'}}>Other people want this.</span> Many people have this in their carts right now.</p>
+                </div>
+                <div className="detail-small-img-txt">
+                    <img src={truck} alt='truck'></img>
+                    <p><span style={{fontWeight: 'bold'}}>Hooray!</span> This item ships free to the US.</p>
+                </div>
+                <p id='description-txt'>Description</p>
+                <p>{product.description}</p>
+            </div>
+        </div>
     )
 }
 
