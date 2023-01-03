@@ -67,10 +67,12 @@
 /* to display two elements in one line */
 #my-lst-price {
     display: inline-block;
-    margin-right: 140px;
+    width: 50%;
 }
 #pen-cross {
     display: inline-block;
+    width: 50%;
+    text-align: end;
 }
 
 #my-list-wrapper{

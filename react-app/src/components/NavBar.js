@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import LoginForm from './auth/LoginForm';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -37,11 +38,12 @@ const NavBar = () => {
     if (!user) {
         content = (
           <div className='navbar-right'>
-            <div>
+            {/* <div>
               <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/login' exact={true} activeClassName='active'>
                 <button className='navbar-button'>Login</button>
               </NavLink>
-            </div>
+            </div> */}
+            <LoginForm />
             <div>
               <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/sign-up' exact={true} activeClassName='active'>
                 <button className='navbar-button'>Sign Up</button>
@@ -64,12 +66,12 @@ const NavBar = () => {
               </button>
               {showMenu && (
                 <ul className="profile-dropdown">
-                  <li>{user.username}</li>
-                  <li>{user.email}</li>
-                  <li>
+                  <li className='dropdown-txt'><i class="fa-solid fa-user">&nbsp;&nbsp;</i>{user.username}</li>
+                  <li className='dropdown-txt'><i class="fa-solid fa-envelope">&nbsp;&nbsp;</i>{user.email}</li>
+                  <li className='dropdown-txt'>
                     <NavLink style={{ color: 'black'}} key='review' to='/'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
                   </li>
-                  <li>
+                  <li id='dropdown-signout'>
                     <LogoutButton />
                   </li>
                 </ul>
