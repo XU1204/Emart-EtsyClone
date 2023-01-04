@@ -16,3 +16,7 @@
 .change-product-button:hover {
     background-color: #fbb75d;
 }
+
+.create-listing-input{
+    display: flex;
+}
