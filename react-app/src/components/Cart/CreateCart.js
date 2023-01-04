@@ -8,14 +8,16 @@ function CreateCart({product, isExist}) {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const user = useSelector(state => Object.values(state.session)[0])
-
     const [quantity, setQuantity] = useState(1)
+
+    const user = useSelector(state => Object.values(state.session)[0])
 
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        if (!user) window.alert('Please sign in to add to cart!')
+        if (!user) {
+           return window.alert('Please sign in or register first!')
+        }
 
         const payload = {
             itemId: product.id,

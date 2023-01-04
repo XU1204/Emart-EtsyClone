@@ -32,6 +32,15 @@ function App() {
     return null;
   }
 
+  const PageNotFound= () =>{
+    return (
+      <div>
+          <h1>404 Error</h1>
+          <h1>Page Not Found</h1>
+      </div>
+    )
+  }
+
   return (
       <BrowserRouter>
         <div className='page-container'>
@@ -40,9 +49,10 @@ function App() {
             {/* <Route path='/login' exact={true}>
               <LoginForm />
             </Route> */}
-            <Route path='/sign-up' exact={true}>
+            {/* <Route path='/sign-up' exact={true}>
               <SignUpForm />
-            </Route>
+            </Route> */}
+
             <ProtectedRoute path='/users' exact={true} >
               <UsersList/>
             </ProtectedRoute>
@@ -67,6 +77,7 @@ function App() {
             <Route path='/coming-soon' exact={true} >
               <h1 id='coming-soon'>Feature coming soon! <i class="fa-regular fa-face-smile"></i></h1>
             </Route>
+            <Route path="*" exact={true} component={PageNotFound} />
           </Switch>
           <Footer />
         </div>
