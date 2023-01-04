@@ -3,10 +3,12 @@ import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
 import { createProduct } from '../../store/product';
 import './createUpdateProduct.css'
+import { useHistory } from 'react-router-dom';
 
 function CreateProduct ( ) {
     // const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -35,26 +37,27 @@ function CreateProduct ( ) {
         if (price <= 0) errors.push('Price nust be greater than 0.');
         if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
         if (description.length > 254) errors.push('Description must be less than 255 characters.')
-        if (name.length > 254) errors.push('Name must be less than 255 characters.')
+        if (name.length > 254) errors.push('Title must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
-        if (name.trim().length === 0) errors.push('Name should not contain only spaces.')
+        if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
         setErrors(errors)
 
-        return dispatch(createProduct(payload))
+        const newProduct = dispatch(createProduct(payload))
         .catch(async (res) => {
         const data = await res.json();
         if (data && typeof data.errors === 'object') {
             setErrors(Object.values(data.errors))
         }
-        if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
-        else {
-            // setShowModal(false)
+        else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
+        else if (newProduct) {
+            console.log('+++++++++++')
             setAvalibility(1)
             setName('')
             setDescription('')
             setCategoryId(1)
             setPrice(0)
             setPreviewImage('')
+            history.push('/products/current')
         }
         });
     }
@@ -115,6 +118,7 @@ function CreateProduct ( ) {
                         <div className="create-listing-input">
                             <div>
                                 <label htmlFor='price'>Price{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Please input an appropriate listing price.</p>
                             </div>
                             <input required
                                 type="number" min='0' step="0.01"
@@ -144,22 +148,22 @@ function CreateProduct ( ) {
                             </select>
                         </div>
 
-                        <div className="craeate-listing-input">
+                        <div className="create-listing-input">
                             <div>
                                 <label htmlFor='previewImage'>Preview Image{' '}<span style={{color: 'red'}}>*</span></label>
                                 <p>Please enter the url for the product. A good preview image can make your listing more appealing!</p>
                             </div>
-                            <textarea
-                                type="text"
+                            <input
+                                id='image-url-input'
+                                type="url"
                                 onChange={(e) => setPreviewImage(e.target.value)}
                                 value={previewImage}
-                                placeholder="Preview Image Address"
-                                style={{resize: 'none'}}>
-                            </textarea>
+                                placeholder="Please enter a valid image address, for example: https://example.com">
+                            </input>
                         </div>
 
-                        <div>
-                            <button type="submit" className="change-product-button">Submit</button>
+                        <div id='submit-create-btn-container'>
+                            <button id='submit-create-btn' type="submit" className="change-product-button">Submit</button>
                         </div>
                     </form>
                     </div>
