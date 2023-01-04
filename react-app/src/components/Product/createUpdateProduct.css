@@ -1,6 +1,22 @@
+.create-listing-container{
+    margin: 40px 80px;
+    min-width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .error-ul {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    color:red;
+}
+
+.create-listing-form>h4{
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+.create-listing-form>p{
+    color: grey;
 }
 
 .change-product-button {
@@ -15,4 +31,46 @@
 
 .change-product-button:hover {
     background-color: #fbb75d;
+}
+
+.create-listing-input{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.create-listing-input>div{
+    width: 30%;
+    margin-right: 5%;
+}
+
+.create-listing-input>div>label {
+    font-weight: bold;
+}
+.create-listing-input>div>p{
+    color: grey;
+    margin-top: 5px;
+}
+
+.create-listing-input>textarea {
+    width: 60%;
+}
+
+.create-listing-input>select,
+.create-listing-input>input {
+    width: 20%;
+    height: 40px;
+}
+
+#submit-create-btn-container{
+    text-align:center;
+}
+
+#submit-create-btn{
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#image-url-input{
+    width: 60%;
 }
