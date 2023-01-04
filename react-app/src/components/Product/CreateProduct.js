@@ -42,15 +42,31 @@ function CreateProduct ( ) {
         if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
         setErrors(errors)
 
-        const newProduct = dispatch(createProduct(payload))
-        .catch(async (res) => {
-        const data = await res.json();
-        if (data && typeof data.errors === 'object') {
-            setErrors(Object.values(data.errors))
+        if (errors.length) {
+            // console.log(errors)
+            return;
         }
-        else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
-        else if (newProduct) {
-            console.log('+++++++++++')
+
+        // const newProduct = dispatch(createProduct(payload))
+        // .catch(async (res) => {
+        // const data = await res.json();
+        // if (data && typeof data.errors === 'object') {
+        //     setErrors(Object.values(data.errors))
+        // }
+        // else if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
+        // else if (newProduct) {
+        //     console.log('+++++++++++')
+        //     setAvalibility(1)
+        //     setName('')
+        //     setDescription('')
+        //     setCategoryId(1)
+        //     setPrice(0)
+        //     setPreviewImage('')
+        //     history.push('/products/current')
+        // }
+        // });
+        return dispatch(createProduct(payload))
+        .then(() => {
             setAvalibility(1)
             setName('')
             setDescription('')
@@ -58,8 +74,7 @@ function CreateProduct ( ) {
             setPrice(0)
             setPreviewImage('')
             history.push('/products/current')
-        }
-        });
+        })
     }
 
     return (
