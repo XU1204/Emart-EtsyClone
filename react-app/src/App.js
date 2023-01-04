@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Homepage from './components/Homepage/Homepage';
 import MyListing from './components/Product/MyLisitng';
+import CreateProduct from './components/Product/CreateProduct';
 import ProductDetail from './components/Product/ProductDetails';
 import MyCart from './components/Cart/Cart';
 import CheckoutCart from './components/Cart/CheckoutCart';
@@ -32,6 +33,15 @@ function App() {
     return null;
   }
 
+  const PageNotFound= () =>{
+    return (
+      <div>
+          <h1>404 Error</h1>
+          <h1>Page Not Found</h1>
+      </div>
+    )
+  }
+
   return (
       <BrowserRouter>
         <div className='page-container'>
@@ -40,9 +50,10 @@ function App() {
             {/* <Route path='/login' exact={true}>
               <LoginForm />
             </Route> */}
-            <Route path='/sign-up' exact={true}>
+            {/* <Route path='/sign-up' exact={true}>
               <SignUpForm />
-            </Route>
+            </Route> */}
+
             <ProtectedRoute path='/users' exact={true} >
               <UsersList/>
             </ProtectedRoute>
@@ -51,6 +62,9 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute path='/products/current' exact={true} >
               <MyListing />
+            </ProtectedRoute>
+            <ProtectedRoute path='/products/new' exact={true} >
+              <CreateProduct />
             </ProtectedRoute>
             <Route path='/products/:productId' exact={true} >
               <ProductDetail />
@@ -67,6 +81,7 @@ function App() {
             <Route path='/coming-soon' exact={true} >
               <h1 id='coming-soon'>Feature coming soon! <i class="fa-regular fa-face-smile"></i></h1>
             </Route>
+            <Route path="*" exact={true} component={PageNotFound} />
           </Switch>
           <Footer />
         </div>

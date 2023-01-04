@@ -49,7 +49,9 @@ const MyListing = () => {
         <div id='my-list-wrapper'>
             <div id='shop-top-bar'>
                 <h2>Your Amazing Shop:</h2>
-                <CreateProduct />
+                <NavLink to='/products/new'>
+                    <button className="change-product-button"><i class="fa-solid fa-plus"></i> Add a new listing</button>
+                </NavLink>
             </div>
             {content}
         </div>

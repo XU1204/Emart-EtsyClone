@@ -5,7 +5,7 @@ import { createProduct } from '../../store/product';
 import './createUpdateProduct.css'
 
 function CreateProduct ( ) {
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
 
     const [name, setName] = useState("")
@@ -48,7 +48,7 @@ function CreateProduct ( ) {
         }
         if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
         else {
-            setShowModal(false)
+            // setShowModal(false)
             setAvalibility(1)
             setName('')
             setDescription('')
@@ -60,77 +60,112 @@ function CreateProduct ( ) {
     }
 
     return (
-        <>
-            <button onClick={()=> setShowModal(true)} className="change-product-button"><i class="fa-solid fa-plus"></i> Add new product</button>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <div className="create-product-container">
-                    <form className="create-product" onSubmit={handleSubmit}>
-                        <h4>Create a new product</h4>
+        <div>
+            {/* <button className="change-product-button"><i class="fa-solid fa-plus"></i> Add new product</button> */}
+            {/* {showModal && (
+                <Modal onClose={() => setShowModal(false)}> */}
+                    <div className="create-listing-container">
+                    <form className="create-listing-form" onSubmit={handleSubmit}>
+                        <h4>Listing details</h4>
+                        <p>Tell the world all about your item and why they'll love it.</p>
                         <ul className='error-ul'>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
-                        <div className="product-form-input">Name</div>
-                        <textarea required
-                            type="text"
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
-                            placeholder="Name"
-                            style={{resize: 'none'}}>
-                        </textarea>
-                        <div className="product-form-input">Description</div>
-                        <textarea required
-                            type="text"
-                            onChange={(e) => setDescription(e.target.value)}
-                            value={description}
-                            placeholder="Description"
-                            style={{resize: 'none'}}>
-                        </textarea>
-                        <div className="product-form-input">Avalibility</div>
-                        <input required
-                            type="number" min='1'
-                            onChange={(e) => setAvalibility(e.target.value)}
-                            value={avalibility}
-                            placeholder="Avalibility"></input>
-                        <div className="product-form-input">Price</div>
-                        <input required
-                            type="number" min='0' step="0.01"
-                            onChange={(e) => setPrice(e.target.value)}
-                            value={price}
-                            placeholder="Price"></input>
 
-                        <div className="product-form-input">Category</div>
-                        <select
-                            name='categoryId'
-                            onChange={(e) => setCategoryId(e.target.value)}
-                            value={categoryId}
-                        >
-                            <option value='' disabled>
-                                Select a Category...
-                            </option>
-                            <option value='1'>Jewelry & Accessories</option>
-                            <option value='2'>Clothing & Shoes</option>
-                            <option value='3'>Home & Living</option>
-                            <option value='4'>Toys & Entertainment</option>
-                            <option value='5'>Art & Collectibles</option>
-                        </select>
+                        <div className="create-listing-input">
+                            <div>
+                                <label htmlFor='name'>Title{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Include keywords that buyers would use to search for your items.</p>
+                            </div>
+                            <textarea required
+                                type="text"
+                                onChange={(e) => setName(e.target.value)}
+                                value={name}
+                                placeholder="Title"
+                                style={{resize: 'none'}}>
+                            </textarea>
+                        </div>
 
-                        <div className="product-form-input">Preview Image</div>
-                        <textarea
-                            type="text"
-                            onChange={(e) => setPreviewImage(e.target.value)}
-                            value={previewImage}
-                            placeholder="Preview Image Address"
-                            style={{resize: 'none'}}>
-                        </textarea>
+                        <div className="create-listing-input">
+                            <div>
+                                <label htmlFor='description'>Description{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Start with a brief overview that describes your item's great features. Shoppers will only see the first few lines of your description, so make it count!</p>
+                            </div>
+                            <textarea required
+                                type="text"
+                                onChange={(e) => setDescription(e.target.value)}
+                                value={description}
+                                placeholder="Description"
+                                style={{resize: 'none'}}>
+                            </textarea>
+                        </div>
+
+                        <div className="create-listing-input">
+                            <div>
+                                <label htmlFor='avalibility'>Avalibility{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Please select how many items are in stock.</p>
+                            </div>
+                            <input required
+                                type="number" min='1'
+                                onChange={(e) => setAvalibility(e.target.value)}
+                                value={avalibility}
+                                placeholder="Avalibility"></input>
+                        </div>
+
+                        <div className="create-listing-input">
+                            <div>
+                                <label htmlFor='price'>Price{' '}<span style={{color: 'red'}}>*</span></label>
+                            </div>
+                            <input required
+                                type="number" min='0' step="0.01"
+                                onChange={(e) => setPrice(e.target.value)}
+                                value={price}
+                                placeholder="Price"></input>
+                        </div>
+
+                        <div className="create-listing-input">
+                            <div>
+                                <label htmlFor='categoryId'>Category{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Select the category from dropdown menu which will help more shppers to find it.</p>
+                            </div>
+                            <select
+                                name='categoryId'
+                                onChange={(e) => setCategoryId(e.target.value)}
+                                value={categoryId}
+                            >
+                                <option value='' disabled>
+                                    Select a Category...
+                                </option>
+                                <option value='1'>Jewelry & Accessories</option>
+                                <option value='2'>Clothing & Shoes</option>
+                                <option value='3'>Home & Living</option>
+                                <option value='4'>Toys & Entertainment</option>
+                                <option value='5'>Art & Collectibles</option>
+                            </select>
+                        </div>
+
+                        <div className="craeate-listing-input">
+                            <div>
+                                <label htmlFor='previewImage'>Preview Image{' '}<span style={{color: 'red'}}>*</span></label>
+                                <p>Please enter the url for the product. A good preview image can make your listing more appealing!</p>
+                            </div>
+                            <textarea
+                                type="text"
+                                onChange={(e) => setPreviewImage(e.target.value)}
+                                value={previewImage}
+                                placeholder="Preview Image Address"
+                                style={{resize: 'none'}}>
+                            </textarea>
+                        </div>
+
                         <div>
                             <button type="submit" className="change-product-button">Submit</button>
                         </div>
                     </form>
                     </div>
-                </Modal>
-            )}
-        </>
+                {/* </Modal>
+            )} */}
+        </div>
     )
 }
 

@@ -9,7 +9,7 @@ function CheckoutCart() {
         <div id='order-palced-container'>
             <img src={flag} alt='flag'></img>
             <h1>Thanks for your order!</h1>
-            <p>We'll contact you if there're any updates'.</p>
+            <p>We'll contact you if there're any updates.</p>
         </div>
     )
 }
