@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
 import { createProduct } from '../../store/product';
 import './createUpdateProduct.css'
@@ -43,7 +42,6 @@ function CreateProduct ( ) {
         setErrors(errors)
 
         if (errors.length) {
-            // console.log(errors)
             return;
         }
 
