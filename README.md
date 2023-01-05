@@ -1,5 +1,5 @@
-![logo](https://user-images.githubusercontent.com/107005038/210832206-bbc6488a-f79b-480e-9ae2-228c4ef951fa.png)
-#Emarty
+![logo](./react-app/src/assets/logo.png)
+# Emarty
 Live site: https://emart-etsyclone.onrender.com/
 
 ## What's this?
