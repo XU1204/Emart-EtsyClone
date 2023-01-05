@@ -1,8 +1,19 @@
-# Flask React Project
+![logo](https://user-images.githubusercontent.com/107005038/210832206-bbc6488a-f79b-480e-9ae2-228c4ef951fa.png)
+#Emarty
+Live site: https://emart-etsyclone.onrender.com/
 
-This is the starter for the Flask React project.
+## What's this?
+Emarty is a full-stack clone project that is originally cloned from Esty. It helps user to buy and sell products. This project aims for developers to practice using different technologies and build their web application from scratch.
 
-## Getting started
+## Technologies/Frameworks Used (Frontend and Backend)
+
+## MVP Core features
+
+## Screenshots
+
+
+
+## How to launch the full application locally
 1. Clone this repository (only this branch)
 
 2. Install dependencies
