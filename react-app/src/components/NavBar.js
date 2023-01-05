@@ -71,7 +71,7 @@ const NavBar = () => {
                   <li className='dropdown-txt'><i class="fa-solid fa-user">&nbsp;&nbsp;</i>{user.username}</li>
                   <li className='dropdown-txt'><i class="fa-solid fa-envelope">&nbsp;&nbsp;</i>{user.email}</li>
                   <li className='dropdown-txt'>
-                    <NavLink style={{ color: 'black'}} key='review' to='/'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
+                    <NavLink style={{ color: 'black'}} key='review' to='/coming-soon'><i className="fa-regular fa-clipboard"></i>My Reviews</NavLink>
                   </li>
                   <li id='dropdown-signout'>
                     <LogoutButton />
