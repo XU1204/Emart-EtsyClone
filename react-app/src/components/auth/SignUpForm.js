@@ -76,7 +76,7 @@ const SignUpForm = () => {
             <form onSubmit={onSignUp}>
               <h2>Create your account</h2>
               <p id='registration-txt'>Registration is easy.</p>
-              <div>
+              <div id='errors'>
                 {errors.map((error, ind) => (
                   <div key={ind}>{error}</div>
                 ))}
@@ -84,6 +84,7 @@ const SignUpForm = () => {
               <div className='login-form-input'>
                 <label>Email address{' '}<span className='asterisk'>*</span></label>
                 <input
+                  required
                   type='email'
                   name='email'
                   onChange={updateEmail}
@@ -93,6 +94,7 @@ const SignUpForm = () => {
               <div className='login-form-input'>
                 <label>Username&nbsp;<span className='asterisk'>*</span></label>
                 <input
+                  required
                   type='text'
                   name='username'
                   onChange={updateUsername}
@@ -102,6 +104,7 @@ const SignUpForm = () => {
               <div className='login-form-input'>
                 <label>Password&nbsp;<span className='asterisk'>*</span></label>
                 <input
+                  required
                   type='password'
                   name='password'
                   onChange={updatePassword}
