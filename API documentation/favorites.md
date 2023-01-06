@@ -21,24 +21,23 @@ Return all of the current user's favorite products
       "Favorites": [
         {
           "id": 1,
-          "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
-          "description": "Infant Toy",
-          "avalibility": 10,
-          "sellerId": 1,
-          "categoryId": 5,
-          "price": 30.99,
-          "previewImage": "image url",
-          "Seller": {
+          "userId": 1,
+          "productId": 1,
+          "Product": {
+            "id": 1,
+            "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+            "description": "Infant Toy",
+            "avalibility": 10,
+            "sellerId": 1,
+            "categoryId": 5,
+            "price": 30.99,
+            "previewImage": "image url",
+          },
+          "User": {
             "id": 1,
             "username": "johndoe",
             "email": "john@doe.com",
-          },
-          "Category": {
-            "id": 1,
-            "categoryName": "kids",
-          },
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36"
+          }
         }
       ]
     }
@@ -57,12 +56,7 @@ Add a product to current user's favorite list
 
     ```json
     {
-      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
-      "description": "Infant Toy",
-      "avalibility": 10,
-      "categoryId": 5,
-      "price": 30.99,
-      "previewImage": "image url",
+      "productId": 1
     }
     ```
 
@@ -75,42 +69,47 @@ Add a product to current user's favorite list
     ```json
     {
       "id": 1,
-      "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
-      "description": "Infant Toy",
-      "avalibility": 10,
-      "sellerId": 1,
-      "categoryId": 5,
-      "price": 30.99,
-      "previewImage": "image url",
-      "Seller": {
+      "userId": 1,
+      "productId": 1,
+      "Product": {
+        "id": 1,
+        "name": "Yeaye Crawling Crab Baby Toy Gifts，Infant Tummy Time Toys",
+        "description": "Infant Toy",
+        "avalibility": 10,
+        "sellerId": 1,
+        "categoryId": 5,
+        "price": 30.99,
+        "previewImage": "image url",
+      },
+      "User": {
         "id": 1,
         "username": "johndoe",
         "email": "john@doe.com",
-      },
-      "Category": {
-            "id": 1,
-            "categoryName": "kids",
-          },
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36"
+      }
     }
     ```
 
-* Error response: Body validation errors
-  * Status Code: 400
+
+### Delete a product from user's favorite list
+
+Delete an existing favorite product
+
+* Require Authentication: true
+* Require proper authorization: Product must belong to the current user.
+* Request
+  * Method: DELETE
+  * URL: /api/favorites/:favoriteId
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "message": "Validation error",
-      "statusCode": 400,
-      "errors": {
-        "name": "Name required",
-        "description": "Description required",
-        "price": "Price is required and must be greater than 0",
-        "avalibility": "Avalibility is required and must be greater than 0"
-      }
+      "message": "Successfully deleted",
+      "statusCode": 200
     }
     ```

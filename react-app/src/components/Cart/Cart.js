@@ -28,7 +28,7 @@ function MyCart () {
     if (carts.length === 0) {
         content = (
             <div className="empty-cart-container">
-                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Earty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
+                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Emarty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
                 <div id='cart-empty-txt'>
                     You cart is empty.
                 </div>
@@ -46,7 +46,7 @@ function MyCart () {
                         <button id='keep-shopping'>Keep shopping</button>
                     </NavLink>
                 </div>
-                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Earty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
+                <div className="cart-snd-line"><img id='handshake' src={handshake} alt='handshake'></img><span>Emarty Purchase Protection:</span>&nbsp;Shop confidently on Emarty knowing if something goes wrong with an order, we've got your back.</div>
                 <div className="cart-middle-container">
                     <div>
                         {carts.map(cart => (
@@ -56,7 +56,8 @@ function MyCart () {
                                     <div className="each-cart-middle-container">
                                         <div className="cart-img-container">
                                             <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                                <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name} onError={e => { e.currentTarget.src = "https://egthreads.com/wp-content/uploads/2022/08/no-preview-3.png"}}></img>
+                                                <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name}
+                                                    onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                                             </NavLink>
                                         </div>
                                         <div id='cart-name-remove'>
@@ -100,7 +101,7 @@ function MyCart () {
     return (
         <div id='cart-page-container'>
             {content}
-            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>&nbsp;Earty offsets carbon emissions from every delivery</div>
+            <div id='cart-slogan'><i class="fa-brands fa-pagelines"></i>&nbsp;Emarty offsets carbon emissions from every delivery</div>
         </div>
     )
 }
