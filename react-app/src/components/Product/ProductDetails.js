@@ -31,14 +31,16 @@ function ProductDetail () {
     return (
         <div className="detail-cantainer">
             <div className="detail-left-container">
-                <img src={product.previewImage}></img>
+                <img src={product.previewImage}
+                    onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
+                </img>
             </div>
             <div className="detail-right-container">
                 <p id='detail-name'>{product.name}</p>
                 <div id='detail-price'>${product.price.toFixed(2)}</div>
                 <CreateCart product={product} isExist={isExist}/>
                 <div className="detail-small-img-txt">
-                    <img src={cart} alt='cart'></img>
+                    <img src={cart} alt='cart' />
                     <p><span style={{fontWeight: 'bold'}}>Other people want this.</span> Many people have this in their carts right now.</p>
                 </div>
                 <div className="detail-small-img-txt">

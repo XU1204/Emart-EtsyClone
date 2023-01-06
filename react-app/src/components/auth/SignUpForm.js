@@ -122,7 +122,7 @@ const SignUpForm = () => {
                 ></input>
               </div>
               <button id='login-button' type='submit'>Register</button>
-              <p id='login-form-term'>By clicking Sign in, you agree to Earty's Terms of Use and Privacy Policy. Earty may send you communications; you may change your preferences in your account settings. We'll never post without your permission.</p>
+              <p id='login-form-term'>By clicking Sign in, you agree to Emarty's Terms of Use and Privacy Policy. Emarty may send you communications; you may change your preferences in your account settings. We'll never post without your permission.</p>
             </form>
           </div>
         </Modal>
