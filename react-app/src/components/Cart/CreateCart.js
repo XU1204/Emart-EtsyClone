@@ -30,9 +30,12 @@ function CreateCart({product, isExist}) {
         // if the item is already in your cart, just update the quantity
         } else {
             const payload2 = {
-                quantity: isExist.quantity + quantity
+                quantity: isExist.quantity + Number(quantity)
             }
-            await dispatch(updateCart(isExist.id, payload2))
+            if (payload2.quantity > 20) {
+                return window.alert('Quantity of single item in your shopping cart should not exceed 20. Please check your shopping cart for the quantity!')
+            }
+            else await dispatch(updateCart(isExist.id, payload2))
         }
 
         history.push('/carts')
@@ -47,7 +50,7 @@ function CreateCart({product, isExist}) {
                 value={quantity}
                 >
                 {/* [...Array(11).keys()] is [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] */}
-                {[...Array(11).keys()].slice(1).map((num) => (
+                {[...Array(21).keys()].slice(1).map((num) => (
                     <option
                         key={num}
                         value={num}

@@ -25,7 +25,7 @@ function UpdateCart({cart}) {
                 value={quantity}
             >
                 {/* [...Array(11).keys()] is [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] */}
-                {[...Array(11 + quantity).keys()].slice(1).map((num) => (
+                {[...Array(21).keys()].slice(1).map((num) => (
                     <option
                         key={num}
                         value={num}

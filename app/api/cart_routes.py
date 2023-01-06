@@ -36,7 +36,6 @@ def add_item ():
     if form.validate_on_submit():
         new_item = Cart(
             user_id = current_user.id,
-            # ????????????????????????????
             item_id = form.data['itemId'],
             quantity = form.data['quantity'],
         )
