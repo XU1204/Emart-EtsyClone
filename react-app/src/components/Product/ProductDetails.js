@@ -48,7 +48,7 @@ function ProductDetail () {
                     <p><span style={{fontWeight: 'bold'}}>Hooray!</span> This item ships free to the US.</p>
                 </div>
                 <p id='description-txt'>Description</p>
-                <p>{product.description}</p>
+                <p id='detail-description'>{product.description}</p>
             </div>
         </div>
     )
