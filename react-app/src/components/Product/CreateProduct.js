@@ -39,8 +39,12 @@ function CreateProduct ( ) {
         if (name.length > 254) errors.push('Title must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
         if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
-        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', 'svg']
-        if (!imgEnd.includes(previewImage.slice(-4))) errors.push("Preview Image Url should end with '.jpg', '.jpeg', '.png', '.pdf', '.gif' or 'svg'.")
+        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
+        let count = 0
+        for (let i = 0; i < 6; i++) {
+            if (previewImage.includes(imgEnd[i])) count++
+        }
+        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
 
         setErrors(errors)
 
