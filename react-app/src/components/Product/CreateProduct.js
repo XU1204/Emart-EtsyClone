@@ -44,7 +44,7 @@ function CreateProduct ( ) {
         for (let i = 0; i < 6; i++) {
             if (previewImage.includes(imgEnd[i])) count++
         }
-        if (count === 0) errors.push("Preview Image Url should end with '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
+        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
 
         setErrors(errors)
 
