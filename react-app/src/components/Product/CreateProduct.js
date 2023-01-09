@@ -178,7 +178,7 @@ function CreateProduct ( ) {
                                 type="url"
                                 onChange={(e) => setPreviewImage(e.target.value)}
                                 value={previewImage}
-                                placeholder="Please enter a valid image address, for example: https://example.com">
+                                placeholder="Please enter a valid image address, for example: https://example.png">
                             </input>
                         </div>
 

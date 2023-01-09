@@ -46,7 +46,7 @@ function UpdateProduct ({product} ) {
             if (previewImage.includes(imgEnd[i])) count++
         }
         if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
-        
+
         setErrors(errors)
 
         if (errors.length) return;
@@ -170,7 +170,7 @@ function UpdateProduct ({product} ) {
                                 type="url"
                                 onChange={(e) => setPreviewImage(e.target.value)}
                                 value={previewImage}
-                                placeholder="Please enter a valid image address, for example: https://example.com">
+                                placeholder="Please enter a valid image address, for example: https://example.png">
                             </input>
                         </div>
 
