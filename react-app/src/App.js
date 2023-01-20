@@ -15,7 +15,7 @@ import ProductDetail from './components/Product/ProductDetails';
 import MyCart from './components/Cart/Cart';
 import CheckoutCart from './components/Cart/CheckoutCart';
 import Footer from './components/Footer/Footer';
-import UpdateProduct from './components/Product/UpdateProduct';
+import UploadPicture from './components/Image/Image';
 import './index.css'
 
 
@@ -76,6 +76,9 @@ function App() {
             <ProtectedRoute path='/carts/checkout' exact={true} >
               <CheckoutCart />
             </ProtectedRoute>
+            <Route path='/images' exact={true} >
+              <UploadPicture />
+            </Route>
             <Route path='/' exact={true} >
               <Homepage />
             </Route>
