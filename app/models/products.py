@@ -25,6 +25,7 @@ class Product(db.Model):
     favorites = db.relationship('Favorite', back_populates='product', cascade="all, delete-orphan")
     images = db.relationship('ProductImage', back_populates='product', cascade="all, delete-orphan", order_by='ProductImage.id')
     reviews = db.relationship("Review", back_populates="product", cascade="all, delete-orphan", order_by='Review.id')
+    purchases = db.relationship("OrderDetail", back_populates="product", cascade="all, delete-orphan", order_by='OrderDetail.id')
 
     def to_dict(self):
         preview_image = list(self.images)[0] if len(self.images) else None
