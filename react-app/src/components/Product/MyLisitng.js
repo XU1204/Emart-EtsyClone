@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProductsOfCurrent, removeProdcut } from "../../store/product";
-import CreateProduct from "./CreateProduct";
 import './product.css'
 import UpdateProduct from "./UpdateProduct";
 

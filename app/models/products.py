@@ -28,9 +28,10 @@ class Product(db.Model):
     purchases = db.relationship("OrderDetail", back_populates="product", cascade="all, delete-orphan", order_by='OrderDetail.id')
 
     def to_dict(self):
-        preview_image = list(self.images)[0] if len(self.images) else None
+        print('self.images+++++++++++', self.images)
+        preview_image =(self.images)[0] if len(self.images) else None
         product_rating = sum(
-            [review.rating for review in self.reviews]) / len(self.reviews) if len(self.reviews) > 0 else None
+            [review.star for review in self.reviews]) / len(self.reviews) if len(self.reviews) > 0 else None
         total_reviews = len(self.reviews)
         sales_num = sum([purchase.quantity for purchase in self.purchases])
 
@@ -42,7 +43,7 @@ class Product(db.Model):
             "sellerId": self.seller_id,
             "categoryId": self.category_id,
             "price": float(self.price),
-            "previewImage": preview_image,
+            "previewImage": preview_image.url,
             "Seller": {
                 "id": self.seller.id,
                 "username": self.seller.username,

@@ -14,14 +14,14 @@ def test():
 # get all products
 @product_routes.route('', methods=['GET'])
 def all_products():
-    products = Product.query.options(joinedload(Product.seller), joinedload(Product.category), joinedload(Product.reviews)).all()
+    products = Product.query.options(joinedload(Product.seller), joinedload(Product.category), joinedload(Product.reviews), joinedload(Product.images)).all()
     return {'Products': [product.to_dict() for product in products]}, 200
 
 # get current user's product listings
 @product_routes.route('/current', methods=['GET'])
 @login_required
 def get_products():
-    products = Product.query.options(joinedload(Product.seller), joinedload(Product.category), joinedload(Product.reviews)).filter(Product.seller_id == current_user.id)
+    products = Product.query.options(joinedload(Product.seller), joinedload(Product.category), joinedload(Product.reviews), joinedload(Product.images)).filter(Product.seller_id == current_user.id)
     return {'Products': [product.to_dict() for product in products]}, 200
 
 
