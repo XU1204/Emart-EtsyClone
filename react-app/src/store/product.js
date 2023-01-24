@@ -32,7 +32,6 @@ export const getProducts = () => async dispatch => {
     if (response.ok) {
         const products = await response.json();
         // products.Products returns an array
-        console.log('getProducts+++++++', products)
         dispatch(load(products.Products))
     }
 };

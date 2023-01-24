@@ -1,9 +1,12 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Product
+from app.models import db, Product, ProductImage
 from ..forms.product_form import ProductForm
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
+from app.s3_helpers import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
+
 
 product_routes = Blueprint('products', __name__)
 
@@ -103,3 +106,44 @@ def delete_product(productId):
     db.session.delete(product)
     db.session.commit()
     return {'message': f'Sucessfully deleted product {product.id}'}, 200
+
+
+# get all the images of products
+@product_routes.route("/<int:productId>/images", methods=['GET'])
+def get_images_by_product_id(productId):
+    product_images = ProductImage.query.filter(ProductImage.product_id == productId)
+    return [product_image.to_dict() for product_image in product_images]
+
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+
+def allowed_file(filename): return '.' in filename and filename.rsplit(
+    '.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@product_routes.route("/<int:productId>/images", methods=['POST'])
+def post_image_by_product_id(productId):
+    try:
+        file = request.files['image']
+        filename = secure_filename(file.filename)
+        if not allowed_file(filename):
+            return {
+                "errors": {
+                    "image": "Please upload a supported image format: .png and .jpg"
+                }
+            }, 400
+        url = upload_image_to_bucket(file, filename)
+        product_image = ProductImage(
+            product_id = productId,
+            url = url
+        )
+        db.session.add(product_image)
+        db.session.commit()
+        return product_image.to_dict()
+    except Exception as e:
+        return {
+            "errors": {
+                "image": str(e)
+            }
+        }, 500

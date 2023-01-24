@@ -34,4 +34,10 @@ def upload_image():
     print('new_image+++++', new_image)
     db.session.add(new_image)
     db.session.commit()
-    return new_image.to_dict(), 200
+    return {"url": url}
+
+
+@image_routes.route("")
+def get_all_images():
+    images = ProductImage.query.order_by(ProductImage.id.desc()).all()
+    return {"images": [image.to_dict() for image in images]}
