@@ -112,7 +112,7 @@ def delete_product(productId):
 @product_routes.route("/<int:productId>/images", methods=['GET'])
 def get_product_images(productId):
     images = ProductImage.query.filter_by(product_id=productId).all()
-    return {'images': [i.to_dict() for i in images]}
+    return {'images': [i.to_dict() for i in images]}, 200
 
 
 # upload product images
@@ -145,4 +145,4 @@ def post_image_by_product_id(productId):
     db.session.add(new_img)
     db.session.commit()
 
-    return {"new_img": new_img.to_dict()}
+    return new_img.to_dict(), 200
