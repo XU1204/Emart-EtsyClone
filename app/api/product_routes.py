@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Product, ProductImage
 from ..forms.product_form import ProductForm
@@ -43,7 +43,7 @@ def create_product():
             seller_id = current_user.id,
             category_id = form.data['categoryId'],
             price = form.data['price'],
-            preview_image = form.data['previewImage'],
+            preview_image = "none",
         )
         db.session.add(new_product)
         db.session.commit()
@@ -110,40 +110,39 @@ def delete_product(productId):
 
 # get all the images of products
 @product_routes.route("/<int:productId>/images", methods=['GET'])
-def get_images_by_product_id(productId):
-    product_images = ProductImage.query.filter(ProductImage.product_id == productId)
-    return [product_image.to_dict() for product_image in product_images]
+def get_product_images(productId):
+    images = ProductImage.query.filter_by(product_id=productId).all()
+    return {'images': [i.to_dict() for i in images]}
 
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
-
-def allowed_file(filename): return '.' in filename and filename.rsplit(
-    '.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
+# upload product images
 @product_routes.route("/<int:productId>/images", methods=['POST'])
+@login_required
 def post_image_by_product_id(productId):
-    try:
-        file = request.files['image']
-        filename = secure_filename(file.filename)
-        if not allowed_file(filename):
-            return {
-                "errors": {
-                    "image": "Please upload a supported image format: .png and .jpg"
-                }
-            }, 400
-        url = upload_image_to_bucket(file, filename)
-        product_image = ProductImage(
-            product_id = productId,
-            url = url
-        )
-        db.session.add(product_image)
-        db.session.commit()
-        return product_image.to_dict()
-    except Exception as e:
-        return {
-            "errors": {
-                "image": str(e)
-            }
-        }, 500
+    product = Product.query.filter(Product.id == productId).one()
+
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+
+    if not allowed_file(image.filename):
+        return {'errors': 'file type is not permitted'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        return upload, 400
+
+    url = upload['url']
+
+    new_img = ProductImage(url=url,product_id=productId)
+
+    Product.images.append(new_img)
+
+    db.session.add(new_img)
+    db.session.commit()
+
+    return {"new_img": new_img.to_dict()}
