@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { createProduct } from '../../store/product';
+import { addProductImage } from '../../store/image';
 import './createUpdateProduct.css'
 import { useHistory } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ function CreateProduct ( ) {
         avalibility,
         categoryId,
         price,
-        previewImage,
+        // previewImage,
         // sellerId: user.id
     }
 
@@ -34,17 +35,17 @@ function CreateProduct ( ) {
 
         let errors = []
         if (price <= 0) errors.push('Price nust be greater than 0.');
-        if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
+        // if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
         if (description.length > 254) errors.push('Description must be less than 255 characters.')
         if (name.length > 254) errors.push('Title must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
         if (name.trim().length === 0) errors.push('Title should not contain only spaces.')
-        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
-        let count = 0
-        for (let i = 0; i < 6; i++) {
-            if (previewImage.includes(imgEnd[i])) count++
-        }
-        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
+        // let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
+        // let count = 0
+        // for (let i = 0; i < 6; i++) {
+        //     if (previewImage.includes(imgEnd[i])) count++
+        // }
+        // if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
 
         setErrors(errors)
 
@@ -70,17 +71,34 @@ function CreateProduct ( ) {
         //     history.push('/products/current')
         // }
         // });
-        return dispatch(createProduct(payload))
-        .then(() => {
-            setAvalibility(1)
-            setName('')
-            setDescription('')
-            setCategoryId(1)
-            setPrice(0)
-            setPreviewImage('')
-            history.push('/products/current')
-        })
+        const newListing = await dispatch(createProduct(payload))
+        if (newListing) {
+            return dispatch(addProductImage(newListing.id, previewImage))
+            .then(() => {
+                setAvalibility(1)
+                setName('')
+                setDescription('')
+                setCategoryId(1)
+                setPrice(0)
+                setPreviewImage('')
+                history.push('/products/current')
+            })
+        }
     }
+
+    const imageArr = [];
+    const updateImages = (e) => {
+        const file = e.target.files[0];
+
+        imageArr.push(file)
+        console.log('image array+++++++', imageArr)
+        if (imageArr.length > 0) {
+            setPreviewImage(imageArr[0]);
+        }
+
+        const image = document.getElementById("preview-img");
+        image.src = URL.createObjectURL(imageArr[0]);
+      };
 
     return (
         <div>
@@ -170,16 +188,37 @@ function CreateProduct ( ) {
 
                         <div className="create-listing-input">
                             <div>
-                                <label htmlFor='previewImage'>Preview Image{' '}<span style={{color: 'red'}}>*</span></label>
-                                <p>Please enter the url for the product. A good preview image can make your listing more appealing!</p>
+                                <label htmlFor='previewImage'>Images{' '}<span style={{color: 'red'}}>*</span></label>
+                                {/* <p>Please enter the url for the product. A good preview image can make your listing more appealing!</p> */}
+                                <p>Please upload images for the listing.</p>
                             </div>
-                            <input
+                            {/* <input
                                 id='image-url-input'
                                 type="url"
                                 onChange={(e) => setPreviewImage(e.target.value)}
                                 value={previewImage}
                                 placeholder="Please enter a valid image address, for example: https://example.png">
-                            </input>
+                            </input> */}
+                            <div className='preview-img-container'>
+                                <img
+                                    id="preview-img"
+                                    alt="preview image"
+                                    className={`${
+                                    previewImage ? "cs-preview-img" : "no-preview-img"
+                                    }`}
+                                    hidden={previewImage ? false : true}
+                                />
+                                {imageArr.slice(1).map(image => (
+                                        <img src={URL.createObjectURL(image)} alt='product image'>
+                                        </img>
+                                    ))
+                                }
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={updateImages}
+                                />
+                            </div>
                         </div>
 
                         <div id='submit-create-btn-container'>

@@ -53,7 +53,7 @@ export const addProductImage = (productId, image) => async (dispatch) => {
 export default function imageReducer(state = {}, action) {
     switch(action.type) {
         case LOAD:
-            newState = {...state};
+            let newState = {...state};
             action.images.forEach(image => {newState[image.id] = image});
             return newState;
         case ADD:
