@@ -6,7 +6,6 @@ import './createUpdateProduct.css'
 import { useHistory } from 'react-router-dom';
 
 function CreateProduct ( ) {
-    // const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -86,18 +85,14 @@ function CreateProduct ( ) {
         }
     }
 
-    const imageArr = [];
-    const updateImages = (e) => {
+    const updateImage = (e) => {
         const file = e.target.files[0];
 
-        imageArr.push(file)
-        console.log('image array+++++++', imageArr)
-        if (imageArr.length > 0) {
-            setPreviewImage(imageArr[0]);
-        }
+        setPreviewImage(file);
 
         const image = document.getElementById("preview-img");
-        image.src = URL.createObjectURL(imageArr[0]);
+        image.src = URL.createObjectURL(file);
+
       };
 
     return (
@@ -203,20 +198,15 @@ function CreateProduct ( ) {
                                 <img
                                     id="preview-img"
                                     alt="preview image"
-                                    className={`${
-                                    previewImage ? "cs-preview-img" : "no-preview-img"
-                                    }`}
+                                    // className={`${
+                                    // previewImage ? "cs-preview-img" : "no-preview-img"
+                                    // }`}
                                     hidden={previewImage ? false : true}
                                 />
-                                {imageArr.slice(1).map(image => (
-                                        <img src={URL.createObjectURL(image)} alt='product image'>
-                                        </img>
-                                    ))
-                                }
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    onChange={updateImages}
+                                    onChange={updateImage}
                                 />
                             </div>
                         </div>

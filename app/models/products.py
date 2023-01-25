@@ -28,7 +28,6 @@ class Product(db.Model):
     purchases = db.relationship("OrderDetail", back_populates="product", cascade="all, delete-orphan", order_by='OrderDetail.id')
 
     def to_dict(self):
-        print('self.images+++++++++++', self.images)
         # preview_image =(self.images)[0] if len(self.images) else None
         product_rating = sum(
             [review.star for review in self.reviews]) / len(self.reviews) if len(self.reviews) > 0 else None

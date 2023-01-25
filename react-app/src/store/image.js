@@ -21,7 +21,6 @@ export const getImgsByProduct = (productId) => async (dispatch) => {
     const response = await fetch(`/api/products/${productId}/images`);
     if (response.ok) {
       const images = await response.json();
-      // console.log("images in thunk", images);
       dispatch(getAll(images.images, productId));
     }
   };
@@ -29,20 +28,16 @@ export const getImgsByProduct = (productId) => async (dispatch) => {
 // add images of product
 export const addProductImage = (productId, image) => async (dispatch) => {
     const formData = new FormData();
-    console.log("formdata--------", formData);
     formData.append("image", image);
 
-    console.log("image-----", image);
-    console.log("formdata--------", formData);
     const response = await fetch(`/api/products/${productId}/images`, {
       method: "POST",
       body: formData,
     });
 
-    // console.log("response", response);
+    console.log("response", response);
     if (response.ok) {
       const new_img = await response.json();
-      console.log("new img int hunk++++++++", new_img);
       await dispatch(addImage(new_img, productId));
       return new_img;
     }

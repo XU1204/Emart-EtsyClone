@@ -58,11 +58,12 @@ def create_product():
 @login_required
 def post_image_by_product_id(productId):
     product = Product.query.filter(Product.id == productId).one()
-
+    # print('back-product ---------', product)
     if "image" not in request.files:
         return {'errors': 'image required'}, 400
 
     image = request.files['image']
+    # print('back-image ---------', image)
 
     if not allowed_file(image.filename):
         return {'errors': 'file type is not permitted'}, 400
@@ -70,15 +71,18 @@ def post_image_by_product_id(productId):
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
+    # print('back-upload ---------', upload)
 
     if 'url' not in upload:
         return upload, 400
 
     url = upload['url']
+    # print('back-url ---------', url)
 
     new_img = ProductImage(url=url,product_id=productId)
+    # print('backend-new_image ---------', new_img.product_id)
 
-    Product.images.append(new_img)
+    product.images.append(new_img)
 
     db.session.add(new_img)
     db.session.commit()
