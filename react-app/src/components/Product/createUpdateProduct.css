@@ -76,6 +76,9 @@
     width: 60%;
 }
 
+.preview-img-container>img{
+    height: 6rem;
+}
 /* UpdateProduct.js */
 .update-listing-container {
     width: 500px;

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProductsOfCurrent, removeProdcut } from "../../store/product";
-import CreateProduct from "./CreateProduct";
 import './product.css'
 import UpdateProduct from "./UpdateProduct";
 
@@ -27,7 +26,7 @@ const MyListing = () => {
                     {products.map(product => (
                         <div key={product.id} className='each-product-container'>
                             <NavLink key={product.id} to={`/products/${product.id}`} style={{ color: 'black', textDecoration: 'none'}}>
-                            <img className="hp-product-img" src={product.previewImage} alt={product.name}
+                            <img className="hp-product-img" src={product.images[0]?.url} alt={product.name}
                                 onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                             <div className="product-details">
                                 <p className="product-name">{product.name}</p>

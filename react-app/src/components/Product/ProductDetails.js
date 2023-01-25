@@ -31,7 +31,7 @@ function ProductDetail () {
     return (
         <div className="detail-cantainer">
             <div className="detail-left-container">
-                <img src={product.previewImage}
+                <img src={product.images[0]?.url}
                     onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
                 </img>
             </div>

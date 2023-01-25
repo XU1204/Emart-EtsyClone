@@ -17,9 +17,9 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.Date, server_default=db.func.now(), server_onupdate=db.func.now())
 
     products = db.relationship('Product', back_populates='seller', cascade="all, delete-orphan")
-    reviews = db.relationship('Review', back_populates='reviewer', cascade="all, delete-orphan")
+    reviews = db.relationship('Review', back_populates='reviewer', cascade="all, delete-orphan", order_by='Review.id')
     cart_items = db.relationship('Cart', back_populates='user', cascade="all, delete-orphan")
-    # favorites = db.relationship('Favorite', back_populates='user', cascade="all, delete-orphan")
+    favorites = db.relationship('Favorite', back_populates='user', cascade="all, delete-orphan", order_by='Favorite.id')
 
     @property
     def password(self):
@@ -36,5 +36,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'favorites': [ x.to_dict() for x in self.favorites],
+            "reviews": [x.to_dict() for x in self.reviews]
         }

@@ -25,6 +25,7 @@ const remove = (productId) => ({
     productId
 })
 
+
 // thunk
 // get all prodcuts
 export const getProducts = () => async dispatch => {
@@ -68,6 +69,7 @@ export const createProduct = (payload) => async dispatch => {
         return data
     }
 }
+
 
 // update info of product
 export const updateProduct = (productId, payload) => async dispatch => {
@@ -118,6 +120,6 @@ export default function productReducer(state = {}, action) {
             delete newState[action.productId];
             return newState;
         default:
-        return state;
+            return state;
     }
   }

@@ -56,7 +56,7 @@ function MyCart () {
                                     <div className="each-cart-middle-container">
                                         <div className="cart-img-container">
                                             <NavLink key={cart.id} to={`/products/${cart.itemId}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                                <img className="cart-product-img" src={cart.Item.previewImage} alt={cart.Item.name}
+                                                <img className="cart-product-img" src={cart.Item.images[0]?.url} alt={cart.Item.name}
                                                     onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                                             </NavLink>
                                         </div>
