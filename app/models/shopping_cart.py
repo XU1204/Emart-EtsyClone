@@ -15,6 +15,7 @@ class Cart(db.Model):
     item = db.relationship('Product', back_populates='cart_items')
 
     def to_dict(self):
+        print('+++++++++++', self.item.images[0].url)
         return {
             "id": self.id,
             "itemId": self.item_id,
@@ -29,6 +30,6 @@ class Cart(db.Model):
                 "sellerId": self.item.seller_id,
                 "categoryId": self.item.category_id,
                 "price": float(self.item.price),
-                "previewImage": self.item.preview_image,
+                "images": [x.to_dict() for x in self.item.images]
             }
         }
