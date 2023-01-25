@@ -12,4 +12,4 @@ class ProductForm(FlaskForm):
     avalibility = IntegerField('Avalibility', [DataRequired()])
     categoryId = SelectField('Category', [DataRequired()], choices=[(1, 'Jewelry & Accessories'), (2, 'Clothing & Shoes'), (3, 'Home & Living'), (4, 'Toys & Entertainment'), (5, 'Art & Collectibles')])
     price = FloatField("Price", validators=[DataRequired()])
-    previewImage = StringField('Preview Image', [DataRequired()])
+    # previewImage = StringField('Preview Image', [DataRequired()])

@@ -29,7 +29,7 @@ class Product(db.Model):
 
     def to_dict(self):
         print('self.images+++++++++++', self.images)
-        preview_image =(self.images)[0] if len(self.images) else None
+        # preview_image =(self.images)[0] if len(self.images) else None
         product_rating = sum(
             [review.star for review in self.reviews]) / len(self.reviews) if len(self.reviews) > 0 else None
         total_reviews = len(self.reviews)
@@ -43,7 +43,7 @@ class Product(db.Model):
             "sellerId": self.seller_id,
             "categoryId": self.category_id,
             "price": float(self.price),
-            "previewImage": preview_image.url,
+            # "previewImage": preview_image.url,
             "Seller": {
                 "id": self.seller.id,
                 "username": self.seller.username,

@@ -43,7 +43,7 @@ def create_product():
             seller_id = current_user.id,
             category_id = form.data['categoryId'],
             price = form.data['price'],
-            preview_image = "none",
+            # preview_image = form.data['previewImage'],
         )
         db.session.add(new_product)
         db.session.commit()
@@ -51,6 +51,40 @@ def create_product():
         return new_product.to_dict(), 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+# upload product images
+@product_routes.route("/<int:productId>/images", methods=['POST'])
+@login_required
+def post_image_by_product_id(productId):
+    product = Product.query.filter(Product.id == productId).one()
+
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+
+    if not allowed_file(image.filename):
+        return {'errors': 'file type is not permitted'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        return upload, 400
+
+    url = upload['url']
+
+    new_img = ProductImage(url=url,product_id=productId)
+
+    Product.images.append(new_img)
+
+    db.session.add(new_img)
+    db.session.commit()
+
+    return new_img.to_dict(), 200
+
 
 #GET details of each product
 @product_routes.route('/<int:productId>', methods=['GET'])
@@ -113,36 +147,3 @@ def delete_product(productId):
 def get_product_images(productId):
     images = ProductImage.query.filter_by(product_id=productId).all()
     return {'images': [i.to_dict() for i in images]}, 200
-
-
-# upload product images
-@product_routes.route("/<int:productId>/images", methods=['POST'])
-@login_required
-def post_image_by_product_id(productId):
-    product = Product.query.filter(Product.id == productId).one()
-
-    if "image" not in request.files:
-        return {'errors': 'image required'}, 400
-
-    image = request.files['image']
-
-    if not allowed_file(image.filename):
-        return {'errors': 'file type is not permitted'}, 400
-
-    image.filename = get_unique_filename(image.filename)
-
-    upload = upload_file_to_s3(image)
-
-    if 'url' not in upload:
-        return upload, 400
-
-    url = upload['url']
-
-    new_img = ProductImage(url=url,product_id=productId)
-
-    Product.images.append(new_img)
-
-    db.session.add(new_img)
-    db.session.commit()
-
-    return new_img.to_dict(), 200

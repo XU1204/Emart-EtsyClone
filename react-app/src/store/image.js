@@ -29,11 +29,11 @@ export const getImgsByProduct = (productId) => async (dispatch) => {
 // add images of product
 export const addProductImage = (productId, image) => async (dispatch) => {
     const formData = new FormData();
-    // console.log("formdata--------", formData);
+    console.log("formdata--------", formData);
     formData.append("image", image);
 
-    // console.log("image-----", image);
-    // console.log("formdata--------", formData);
+    console.log("image-----", image);
+    console.log("formdata--------", formData);
     const response = await fetch(`/api/products/${productId}/images`, {
       method: "POST",
       body: formData,
