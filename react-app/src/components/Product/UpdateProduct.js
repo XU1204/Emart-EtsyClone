@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
-import { updateProduct } from '../../store/product';
+import { updateProduct, getProductsOfCurrent } from '../../store/product';
 import { updateProductImage } from '../../store/image'
 import './createUpdateProduct.css'
 import { useHistory } from 'react-router-dom';
@@ -63,7 +63,7 @@ function UpdateProduct ({product} ) {
                 setPrice(price)
                 setPreviewImage('none')
                 setShowModal(false)
-                history.push('/products/current')
+                dispatch(getProductsOfCurrent())
             })
         }
 
@@ -71,12 +71,10 @@ function UpdateProduct ({product} ) {
 
     const updateImage = (e) => {
         const file = e.target.files[0];
-
         setPreviewImage(file);
 
         const image = document.getElementById("preview-img");
         image.src = URL.createObjectURL(file);
-
     };
 
 

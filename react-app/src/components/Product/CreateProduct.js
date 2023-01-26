@@ -87,7 +87,6 @@ function CreateProduct ( ) {
 
     const updateImage = (e) => {
         const file = e.target.files[0];
-
         setPreviewImage(file);
 
         const image = document.getElementById("preview-img");

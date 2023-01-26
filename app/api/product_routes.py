@@ -115,7 +115,6 @@ def update_image_by_product_id(productId):
     # print('back-url ---------', url)
 
     img = ProductImage.query.filter(ProductImage.id == product.images[0].id).one()
-    print('back-url ---------', img.url)
     img.url = url
 
     db.session.add(img)
@@ -183,5 +182,5 @@ def delete_product(productId):
 # get all the images of products
 @product_routes.route("/<int:productId>/images", methods=['GET'])
 def get_product_images(productId):
-    images = ProductImage.query.filter_by(product_id=productId).all()
-    return {'images': [i.to_dict() for i in images]}, 200
+    images = ProductImage.query.filter(ProductImage.product_id == productId).all()
+    return {'Images': [image.to_dict() for image in images]}, 200

@@ -2,10 +2,10 @@ const LOAD = 'images/LOAD';
 const ADD = "images/ADD";
 const UPDATE = 'images/UPDATE'
 
-const getAll = (images, productId) => ({
+const getAllofProduct = (productId, images) => ({
     type: LOAD,
-    images,
     productId,
+    images
 });
 
 const addImage = (image, productId) => ({
@@ -26,7 +26,7 @@ export const getImgsByProduct = (productId) => async (dispatch) => {
     const response = await fetch(`/api/products/${productId}/images`);
     if (response.ok) {
       const images = await response.json();
-      dispatch(getAll(images.images, productId));
+      dispatch(getAllofProduct(productId, images.Images));
     }
   };
 
@@ -43,7 +43,7 @@ export const addProductImage = (productId, image) => async (dispatch) => {
     // console.log("response", response);
     if (response.ok) {
       const new_img = await response.json();
-      await dispatch(addImage(new_img, productId));
+      dispatch(addImage(new_img, productId));
       return new_img;
     }
   };
@@ -61,7 +61,7 @@ export const updateProductImage = (productId, image) => async dispatch => {
     // console.log("response", response);
     if (response.ok) {
       const updated_img = await response.json();
-      await dispatch(updateImage(updated_img));
+      dispatch(updateImage(updated_img));
       return updated_img;
     }
 }
