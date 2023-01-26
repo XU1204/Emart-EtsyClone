@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
 import { updateProduct } from '../../store/product';
+import { updateProductImage } from '../../store/image'
 import './createUpdateProduct.css'
 import { useHistory } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ function UpdateProduct ({product} ) {
     const [avalibility, setAvalibility] = useState(product.avalibility)
     const [categoryId, setCategoryId] = useState(product.categoryId)
     const [price, setPrice] = useState(product.price)
-    const [previewImage, setPreviewImage] = useState(product.previewImage)
+    const [previewImage, setPreviewImage] = useState('none')
     const [errors, setErrors] = useState([]);
 
     // const user = useSelector(state => Object.values(state.session)[0])
@@ -26,7 +27,7 @@ function UpdateProduct ({product} ) {
         avalibility,
         categoryId,
         price,
-        previewImage,
+        // previewImage,
         // sellerId: user.id
     }
 
@@ -35,51 +36,49 @@ function UpdateProduct ({product} ) {
 
         let errors = []
         if (price <= 0) errors.push('Price nust be greater than 0.');
-        if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
+        // if (!previewImage.startsWith('http://') && !previewImage.startsWith('https://')) errors.push('Preview image url must starts with "http://" or "https://".');
         if (description.length > 254) errors.push('Description must be less than 255 characters.')
         if (name.length > 254) errors.push('Name must be less than 255 characters.')
         if (description.trim().length === 0) errors.push('Description should not contain only spaces.')
         if (name.trim().length === 0) errors.push('Name should not contain only spaces.')
-        let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
-        let count = 0
-        for (let i = 0; i < 6; i++) {
-            if (previewImage.includes(imgEnd[i])) count++
-        }
-        if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
+        // let imgEnd = ['.jpg', '.jpeg', '.png', '.pdf', '.gif', '.svg']
+        // let count = 0
+        // for (let i = 0; i < 6; i++) {
+        //     if (previewImage.includes(imgEnd[i])) count++
+        // }
+        // if (count === 0) errors.push("Preview Image Url should contain '.jpg', '.jpeg', '.png', '.pdf', '.gif' or '.svg'.")
 
         setErrors(errors)
 
         if (errors.length) return;
 
-        // return dispatch(updateProduct(product.id, payload))
-        // .catch(async (res) => {
-        // const data = await res.json();
-        // if (data && typeof data.errors === 'object') {
-        //     setErrors(Object.values(data.errors))
-        // }
-        // if (data && (data.errors || data.message)) setErrors([data.errors? data.errors : data.message])
-        // else {
-        //     setShowModal(false)
-        //     setAvalibility(avalibility)
-        //     setName(name)
-        //     setDescription(description)
-        //     setCategoryId(categoryId)
-        //     setPrice(price)
-        //     setPreviewImage(previewImage)
-        // }
-        // });
+        const updatedListing = await dispatch(updateProduct(product.id, payload))
+        if (updatedListing) {
+            return dispatch(updateProductImage(product.id, previewImage))
+            .then(() => {
+                setAvalibility(avalibility)
+                setName(name)
+                setDescription(description)
+                setCategoryId(categoryId)
+                setPrice(price)
+                setPreviewImage('none')
+                setShowModal(false)
+                history.push('/products/current')
+            })
+        }
 
-        return dispatch(updateProduct(product.id, payload))
-        .then(() => {
-            setAvalibility(avalibility)
-            setName(name)
-            setDescription(description)
-            setCategoryId(categoryId)
-            setPrice(price)
-            setPreviewImage(previewImage)
-            setShowModal(false)
-        })
     }
+
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+
+        setPreviewImage(file);
+
+        const image = document.getElementById("preview-img");
+        image.src = URL.createObjectURL(file);
+
+    };
+
 
     return (
         <>
@@ -165,13 +164,29 @@ function UpdateProduct ({product} ) {
                             <div>
                                 <label htmlFor='previewImage'>Preview Image{' '}<span style={{color: 'red'}}>*</span></label>
                             </div>
-                            <input
+                            {/* <input
                                 id='update-image-url-input'
                                 type="url"
                                 onChange={(e) => setPreviewImage(e.target.value)}
                                 value={previewImage}
                                 placeholder="Please enter a valid image address, for example: https://example.png">
-                            </input>
+                            </input> */}
+                             <div className='preview-img-container'>
+                                <img
+                                    id="preview-img"
+                                    alt="preview image"
+                                    src={product.images[0].url}
+                                    // className={`${
+                                    // previewImage ? "cs-preview-img" : "no-preview-img"
+                                    // }`}
+                                    hidden={previewImage ? false : true}
+                                />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={updateImage}
+                                />
+                            </div>
                         </div>
 
                         <div id='submit-update-btn-container'>

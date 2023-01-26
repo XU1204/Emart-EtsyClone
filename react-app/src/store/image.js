@@ -1,6 +1,6 @@
-const LOAD = 'images/LOAD'
-
+const LOAD = 'images/LOAD';
 const ADD = "images/ADD";
+const UPDATE = 'images/UPDATE'
 
 const getAll = (images, productId) => ({
     type: LOAD,
@@ -13,6 +13,11 @@ const addImage = (image, productId) => ({
     image,
     productId,
 });
+
+const updateImage = (image) => ({
+  type: UPDATE,
+  image
+})
 
 
 // thunk
@@ -35,7 +40,7 @@ export const addProductImage = (productId, image) => async (dispatch) => {
       body: formData,
     });
 
-    console.log("response", response);
+    // console.log("response", response);
     if (response.ok) {
       const new_img = await response.json();
       await dispatch(addImage(new_img, productId));
@@ -43,6 +48,23 @@ export const addProductImage = (productId, image) => async (dispatch) => {
     }
   };
 
+// update preview image of product
+export const updateProductImage = (productId, image) => async dispatch => {
+  const formData = new FormData();
+    formData.append("image", image);
+
+    const response = await fetch(`/api/products/${productId}/images`, {
+      method: "PUT",
+      body: formData,
+    });
+
+    // console.log("response", response);
+    if (response.ok) {
+      const updated_img = await response.json();
+      await dispatch(updateImage(updated_img));
+      return updated_img;
+    }
+}
 
 // Reducer
 export default function imageReducer(state = {}, action) {
@@ -55,6 +77,10 @@ export default function imageReducer(state = {}, action) {
             return {...state,
                     [action.image.id]: action.image
                 };
+        case UPDATE:
+          return {...state,
+                  [action.image.id]: action.image
+                }
         default:
             return state
     }
