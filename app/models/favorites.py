@@ -17,9 +17,9 @@ class Favorite(db.Model):
         return {
             'id': self.id,
             'user': {
-                "id": self.seller.id,
-                "username": self.seller.username,
-                "email": self.seller.email,
+                "id": self.user.id,
+                "username": self.user.username,
+                "email": self.user.email,
             },
             'product': self.product.to_dict()
         }
