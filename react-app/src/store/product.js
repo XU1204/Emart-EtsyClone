@@ -47,6 +47,16 @@ export const getProductsOfCurrent = () => async dispatch => {
     }
 };
 
+// get products of a category
+export const getProductsOfCategory = (categoryId) => async dispatch => {
+    const response = await fetch(`/api/products/categories/${categoryId}`);
+    if (response.ok) {
+        const category = await response.json();
+        // products.Products returns an array
+        dispatch(load(category.products))
+    }
+}
+
 //create a product
 export const createProduct = (payload) => async dispatch => {
     const response = await fetch(`/api/products`, {

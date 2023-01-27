@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Product, ProductImage
+from app.models import db, Product, ProductImage, Category
 from ..forms.product_form import ProductForm
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
@@ -179,8 +179,15 @@ def delete_product(productId):
     return {'message': f'Sucessfully deleted product {product.id}'}, 200
 
 
-# get all the images of products
+# get all the images of a specific product
 @product_routes.route("/<int:productId>/images", methods=['GET'])
 def get_product_images(productId):
     images = ProductImage.query.filter(ProductImage.product_id == productId).all()
     return {'Images': [image.to_dict() for image in images]}, 200
+
+
+# get a category
+@product_routes.route("/categories/<int:categoryId>", methods=['GET'])
+def get_products_of_category(categoryId):
+    category = Category.query.filter(Category.id == categoryId).one()
+    return category.to_dict(), 200

@@ -18,6 +18,7 @@ function UpdateProduct ({product} ) {
     const [price, setPrice] = useState(product.price)
     const [previewImage, setPreviewImage] = useState('none')
     const [errors, setErrors] = useState([]);
+    const [imageLoading, setImageLoading] = useState(false);
 
     // const user = useSelector(state => Object.values(state.session)[0])
 
@@ -33,6 +34,10 @@ function UpdateProduct ({product} ) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // aws uploads can be a bit slow—displaying
+        // some sort of loading message is a good idea
+        setImageLoading(true);
 
         let errors = []
         if (price <= 0) errors.push('Price nust be greater than 0.');
@@ -56,14 +61,15 @@ function UpdateProduct ({product} ) {
         if (updatedListing) {
             return dispatch(updateProductImage(product.id, previewImage))
             .then(() => {
+                dispatch(getProductsOfCurrent())
                 setAvalibility(avalibility)
                 setName(name)
                 setDescription(description)
                 setCategoryId(categoryId)
                 setPrice(price)
                 setPreviewImage('none')
+                setImageLoading(false);
                 setShowModal(false)
-                dispatch(getProductsOfCurrent())
             })
         }
 
@@ -184,6 +190,7 @@ function UpdateProduct ({product} ) {
                                     accept="image/*"
                                     onChange={updateImage}
                                 />
+                                 {(imageLoading)&& <p>Loading...</p>}
                             </div>
                         </div>
 
