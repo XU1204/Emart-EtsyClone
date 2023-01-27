@@ -100,6 +100,8 @@ li:hover #sign-out-button{
     background-color: #d3d3d3;
 }
 
-.fa-clipboard {
-    margin-right: 10px;
+.fa-clipboard,
+.fa-heart {
+    margin-right: 8px;
+    width: 1rem
 }
