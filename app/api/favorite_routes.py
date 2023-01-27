@@ -11,7 +11,9 @@ favorite_routes = Blueprint('favorites', __name__)
 @favorite_routes.route('', methods=['GET'])
 @login_required
 def get_favorites():
+    print('+++++++++++++favo-routes: favos')
     favorites = Favorite.query.filter(Favorite.user_id == current_user.id).all()
+    print('favo-routes: favos', favorites)
     return {'Favorites': [x.to_dict() for x in favorites]}, 200
 
 

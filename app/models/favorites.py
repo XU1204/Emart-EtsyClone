@@ -16,10 +16,12 @@ class Favorite(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user': {
+            "userId": self.user_id,
+            "productId": self.product_id,
+            'User': {
                 "id": self.user.id,
                 "username": self.user.username,
                 "email": self.user.email,
             },
-            'product': self.product.to_dict()
+            'Product': self.product.to_dict()
         }
