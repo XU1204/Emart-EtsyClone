@@ -56,7 +56,6 @@ function Homepage() {
                 </div>
             </div>
             <div id='popular-product-wrapper'>
-                <h3>Popular products right now</h3>
                 <Product />
             </div>
         </div>
