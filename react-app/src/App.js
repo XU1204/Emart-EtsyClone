@@ -15,7 +15,8 @@ import ProductDetail from './components/Product/ProductDetails';
 import MyCart from './components/Cart/Cart';
 import CheckoutCart from './components/Cart/CheckoutCart';
 import Footer from './components/Footer/Footer';
-import UploadPicture from './components/Image/Image';
+import Category from './components/Category/Category';
+import MyFavorites from './components/Favorite/Favorite';
 import './index.css'
 
 
@@ -76,9 +77,15 @@ function App() {
             <ProtectedRoute path='/carts/checkout' exact={true} >
               <CheckoutCart />
             </ProtectedRoute>
-            <Route path='/images' exact={true} >
-              <UploadPicture />
+            <ProtectedRoute path='/favorites' exact={true} >
+              <MyFavorites />
+            </ProtectedRoute>
+            <Route path='/products/categories/:categoryId' exact={true} >
+              < Category />
             </Route>
+            {/* <Route path='/images' exact={true} >
+              <UploadPicture />
+            </Route> */}
             <Route path='/' exact={true} >
               <Homepage />
             </Route>

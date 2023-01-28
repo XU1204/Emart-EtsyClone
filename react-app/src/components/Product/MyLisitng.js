@@ -8,11 +8,11 @@ import UpdateProduct from "./UpdateProduct";
 const MyListing = () => {
     const dispatch = useDispatch()
 
+    const products = useSelector(state => Object.values(state.products))
+
     useEffect(() => {
         dispatch(getProductsOfCurrent())
     }, [dispatch])
-
-    const products = useSelector(state => Object.values(state.products))
 
     let content;
     if (products.length === 0) {

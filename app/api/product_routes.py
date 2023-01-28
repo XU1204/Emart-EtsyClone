@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Product, ProductImage
+from app.models import db, Product, ProductImage, Category
 from ..forms.product_form import ProductForm
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
@@ -53,7 +53,7 @@ def create_product():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-# upload product images
+# upload product preview image
 @product_routes.route("/<int:productId>/images", methods=['POST'])
 @login_required
 def post_image_by_product_id(productId):
@@ -89,6 +89,39 @@ def post_image_by_product_id(productId):
 
     return new_img.to_dict(), 200
 
+# update product preview image
+@product_routes.route("/<int:productId>/images", methods=['PUT'])
+@login_required
+def update_image_by_product_id(productId):
+    product = Product.query.filter(Product.id == productId).one()
+
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+    # print('back-image ---------', image)
+
+    if not allowed_file(image.filename):
+        return {'errors': 'file type is not permitted'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        return upload, 400
+
+    url = upload['url']
+    # print('back-url ---------', url)
+
+    img = ProductImage.query.filter(ProductImage.id == product.images[0].id).one()
+    img.url = url
+
+    db.session.add(img)
+    db.session.commit()
+    return img.to_dict(), 200
+
+
 
 #GET details of each product
 @product_routes.route('/<int:productId>', methods=['GET'])
@@ -121,7 +154,7 @@ def update_product(productId):
         product.avalibility = form.data['avalibility']
         product.category_id = form.data['categoryId']
         product.price = form.data['price']
-        product.preview_image = form.data['previewImage']
+        # product.preview_image = form.data['previewImage']
 
         db.session.add(product)
         db.session.commit()
@@ -146,8 +179,15 @@ def delete_product(productId):
     return {'message': f'Sucessfully deleted product {product.id}'}, 200
 
 
-# get all the images of products
+# get all the images of a specific product
 @product_routes.route("/<int:productId>/images", methods=['GET'])
 def get_product_images(productId):
-    images = ProductImage.query.filter_by(product_id=productId).all()
-    return {'images': [i.to_dict() for i in images]}, 200
+    images = ProductImage.query.filter(ProductImage.product_id == productId).all()
+    return {'Images': [image.to_dict() for image in images]}, 200
+
+
+# get a category
+@product_routes.route("/categories/<int:categoryId>", methods=['GET'])
+def get_products_of_category(categoryId):
+    category = Category.query.filter(Category.id == categoryId).one()
+    return category.to_dict(), 200

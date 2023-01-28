@@ -10,3 +10,10 @@ class Category(db.Model):
     category_name = db.Column(db.String(100), nullable=False)
 
     products = db.relationship('Product', back_populates='category', cascade="all, delete-orphan")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.category_name,
+            "products": [x.to_dict() for x in self.products]
+        }
