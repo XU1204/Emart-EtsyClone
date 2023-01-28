@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Favorite
 from ..forms.favorite_form import FavoriteForm
+from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
 
 
@@ -11,7 +12,6 @@ favorite_routes = Blueprint('favorites', __name__)
 @favorite_routes.route('', methods=['GET'])
 @login_required
 def get_favorites():
-    print('+++++++++++++favo-routes: favos')
     favorites = Favorite.query.filter(Favorite.user_id == current_user.id).all()
     print('favo-routes: favos', favorites)
     return {'Favorites': [x.to_dict() for x in favorites]}, 200
@@ -24,7 +24,7 @@ def get_one_favorite(favoriteId):
     favorite = Favorite.query.filter(Favorite.user_id == current_user.id, Favorite.id == favoriteId).one()
 
     if not favorite:
-        return {'errors': f'This item:{favorite.item.name} is not found in your favorite list!'}, 404
+        return {'errors': f'This item:{favorite.Product.name} is not found in your favorite list!'}, 404
     return favorite.to_dict(), 200
 
 
@@ -52,10 +52,10 @@ def add_favorite():
 @favorite_routes.route('<int:favoriteId>', methods=['DELETE'])
 @login_required
 def delete_favorite(favoriteId):
-    favorite = Favorite.query.filter(Favorite.user_id == current_user.id, Favorite.id == favoriteId).one()
+    favorite = Favorite.query.options(joinedload(Favorite.product)).filter(Favorite.user_id == current_user.id, Favorite.id == favoriteId).one()
     if not favorite:
-        return {'errors': f'This item:{favorite.item.name} is not found in your favorite list!'}, 404
+        return {'errors': f'This item:{favorite.product.name} is not found in your favorite list!'}, 404
 
     db.session.delete(favorite)
     db.session.commit()
-    return {'message': f'Sucessfully deleted item:{favorite.item.name} in favorite list.'}, 200
+    return {'message': f'Sucessfully deleted item:{favorite.product.name} in favorite list.'}, 200

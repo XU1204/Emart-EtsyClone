@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import { getFavoritsofCurrent } from "../../store/favorite";
+import { getFavoritsofCurrent, removeFavorite } from "../../store/favorite";
 
 const MyFavorites = () => {
     const dispatch  = useDispatch();
@@ -10,7 +10,7 @@ const MyFavorites = () => {
         dispatch(getFavoritsofCurrent())
     }, [dispatch])
 
-    const favorites = useSelector(state => state.favortites)
+    const favorites = useSelector(state => state.favorites)
 
     return (
         <div>
@@ -21,6 +21,7 @@ const MyFavorites = () => {
                     <img src={favorite.Product.images[0].url} />
                     <h4>{favorite.Product.name}</h4>
                     <p>${favorite.Product.price}</p>
+                    <button onClick={() => dispatch(removeFavorite(favorite.id))} className="change-product-button"><i className="fa-solid fa-xmark"></i></button>
                 </div>
             ))}
             {!favorites && (
