@@ -27,7 +27,6 @@ export const getFavoritsofCurrent = () => async dispatch => {
     const response = await fetch(`/api/favorites`);
     if (response.ok) {
         const favorites = await response.json();
-        console.log('store+++++', favorites)
         dispatch(load(favorites.Favorites))
     }
 };

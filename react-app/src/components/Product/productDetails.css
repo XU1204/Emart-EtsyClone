@@ -96,3 +96,18 @@
     scale: 1.02;
     background-color: #222222dc;
 }
+
+#detail-heart{
+    border: none;
+    background-color: white;
+    font-size: 22px;
+}
+#detail-heart:hover{
+    cursor: pointer;
+}
+
+.price-heart-container{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}

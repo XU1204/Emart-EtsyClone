@@ -36,7 +36,7 @@ const MyListing = () => {
                             </NavLink>
                             <div id='pen-cross'>
                                 <UpdateProduct product={product} />
-                                <button onClick={() => dispatch(removeProdcut(product.id))} className="change-product-button"><i className="fa-solid fa-xmark"></i></button>
+                                <button onClick={() => dispatch(removeProdcut(product.id))} className="change-product-button" title='Delete Listing'><i className="fa-solid fa-xmark"></i></button>
                             </div>
                         </div>
                     ))}

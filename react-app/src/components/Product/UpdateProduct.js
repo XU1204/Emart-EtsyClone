@@ -86,7 +86,7 @@ function UpdateProduct ({product} ) {
 
     return (
         <>
-            <button onClick={()=> setShowModal(true)} className="change-product-button"><i className="fa-solid fa-pen"></i></button>
+            <button onClick={()=> setShowModal(true)} className="change-product-button" title='Edit Listing'><i className="fa-solid fa-pen"></i></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <div className="update-listing-container">
