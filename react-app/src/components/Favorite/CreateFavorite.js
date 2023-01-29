@@ -27,7 +27,7 @@ const CreateFavorite = ({product}) => {
 
     return (
         <div className="detail-heart-container">
-                <button id='detail-heart' onClick={(e) => handleSubmit(e)} type='submit'>{heart}</button>
+                <button id='detail-heart' onClick={(e) => handleSubmit(e)} type='submit' title={favorite? 'Remove From Favorite List':'Add To Favorite List'}>{heart}</button>
         </div>
     )
 }

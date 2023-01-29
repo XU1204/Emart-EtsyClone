@@ -24,13 +24,12 @@ function ProductDetail () {
     const allProducts = useSelector(state => Object.values(state.products))
     const product = allProducts.find(product => product.id === +productId)
     const carts = useSelector(state => Object.values(state.carts))
-    console.log('detail carts+++++++++', carts)
 
     if(!product) return null
     if (!carts) return null;
     const isExist = carts.find(cart => cart.itemId === +productId)
 
-    
+
     const handleSubmit = async () => {
 
         // if (isFavored) {

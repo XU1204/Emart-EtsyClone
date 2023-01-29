@@ -1,0 +1,39 @@
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+}
+
+.titleWrapper>p{
+    padding-top: 10px;
+}
+
+.priceWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: white;
+    padding: 10px 15px 10px;
+    border-radius: 25px;
+    border: none;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.last {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#discover{
+    color: black;
+}
+#discover:hover {
+    color: grey;
+}
