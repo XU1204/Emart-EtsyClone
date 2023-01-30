@@ -204,6 +204,7 @@ def get_reviews_of_product(productId):
 
 # create a review for a product
 @product_routes.route('/<int:productId>/reviews', methods=['POST'])
+@login_required
 def create_review(productId):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -221,4 +222,3 @@ def create_review(productId):
         return new_review.to_dict(), 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
-
