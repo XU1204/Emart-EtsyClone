@@ -21,7 +21,7 @@ const MyFavorites = () => {
         <div>
             <div className={styles.titleWrapper}>
                 <h1>Favorites items</h1>
-                {exist && <p> {favorites.length} items</p>}
+                {exist && <p> {favorites.length} {favorites.length > 1? 'items':'item'}</p>}
             </div>
             <div className="display-product-wrapper">
                 <div className="display-product-container">

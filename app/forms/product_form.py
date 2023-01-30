@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, TextAreaField, FloatField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms import IntegerField, SelectField, TextAreaField, FloatField
+from wtforms.validators import DataRequired, ValidationError
 
 def len_check(form, field):
     if len(field.data) > 254:

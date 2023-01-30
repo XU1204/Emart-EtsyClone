@@ -24,4 +24,6 @@ class Review(db.Model):
             "star": self.star,
             "reviewerId": self.reviewer_id,
             "productId": self.product_id,
+            "Reviewer": self.reviewer.to_dict(),
+            "Product": self.product.to_dict()
         }
