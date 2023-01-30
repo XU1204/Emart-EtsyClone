@@ -200,7 +200,7 @@ def get_products_of_category(categoryId):
 @product_routes.route('/<int:productId>/reviews', methods=['GET'])
 def get_reviews_of_product(productId):
     reviews = Review.query.filter(Review.product_id == productId)
-    return {'Reviews': {review.to_dict() for review in reviews}}, 200
+    return {'Reviews': [review.to_dict() for review in reviews]}, 200
 
 # create a review for a product
 @product_routes.route('/<int:productId>/reviews', methods=['POST'])

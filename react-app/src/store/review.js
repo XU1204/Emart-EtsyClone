@@ -29,6 +29,7 @@ const remove = (reviewId) => ({
 // get reviews of current user
 export const getReviewsOfCurrent = () => async dispatch => {
     const response = await fetch(`/api/reviews/current`);
+    console.log('11111111111111', response)
     if (response.ok) {
         const reviews = await response.json();
         // products.Products returns an array
@@ -37,8 +38,8 @@ export const getReviewsOfCurrent = () => async dispatch => {
 };
 
 // get reviews of a product
-export const getReviewsOfProduct = () => async dispatch => {
-    const response = await fetch(`/api/products/reviews`);
+export const getReviewsOfProduct = (productId) => async dispatch => {
+    const response = await fetch(`/api/products/${productId}/reviews`);
     if (response.ok) {
         const reviews = await response.json();
         // products.Products returns an array
@@ -58,7 +59,7 @@ export const createReview = (productId, payload) => async dispatch => {
     if (response.ok) {
         const review = await response.json();
         dispatch(create(review));
-        return review
+        return review;
     }
     else {
         const data = await response.json()

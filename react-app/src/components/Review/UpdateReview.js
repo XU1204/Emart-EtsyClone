@@ -2,7 +2,7 @@
 
 const UpdateReview = ({review}) => {
     return (
-        <>gsdgsdf</>
+        <p>gsdgsdf</p>
     )
 }
 

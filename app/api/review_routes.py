@@ -11,8 +11,10 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/current', methods=['GET'])
 @login_required
 def get_reviews_of_current():
+    print('back reviews----------')
     reviews = Review.query.filter(Review.reviewer_id == current_user.id)
-    return {'Reviews': {review.to_dict() for review in reviews}}, 200
+    print('back reviews+++++++', reviews)
+    return {'Reviews': [review.to_dict() for review in reviews]}, 200
 
 
 # update a review for a product
