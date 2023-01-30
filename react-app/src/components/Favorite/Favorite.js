@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getFavoritsofCurrent, removeFavorite } from "../../store/favorite";
 import styles from './favorite.module.css'
 
@@ -21,7 +21,7 @@ const MyFavorites = () => {
         <div>
             <div className={styles.titleWrapper}>
                 <h1>Favorites items</h1>
-                {exist && <p> {favorites.length} items</p>}
+                {exist && <p> {favorites.length} {favorites.length > 1? 'items':'item'}</p>}
             </div>
             <div className="display-product-wrapper">
                 <div className="display-product-container">

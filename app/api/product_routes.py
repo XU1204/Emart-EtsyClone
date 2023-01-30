@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Product, ProductImage, Category
+from app.models import db, Product, ProductImage, Category, Review
 from ..forms.product_form import ProductForm
+from ..forms.review_form import ReviewForm
 from sqlalchemy.orm import joinedload
 from .auth_routes import validation_errors_to_error_messages
 from app.s3_helpers import (
@@ -186,8 +187,38 @@ def get_product_images(productId):
     return {'Images': [image.to_dict() for image in images]}, 200
 
 
+# Categories
 # get a category
 @product_routes.route("/categories/<int:categoryId>", methods=['GET'])
 def get_products_of_category(categoryId):
     category = Category.query.filter(Category.id == categoryId).one()
     return category.to_dict(), 200
+
+
+# Reviews
+# get reviews of single product
+@product_routes.route('/<int:productId>/reviews', methods=['GET'])
+def get_reviews_of_product(productId):
+    reviews = Review.query.filter(Review.product_id == productId)
+    return {'Reviews': [review.to_dict() for review in reviews]}, 200
+
+# create a review for a product
+@product_routes.route('/<int:productId>/reviews', methods=['POST'])
+@login_required
+def create_review(productId):
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        new_review = Review(
+            review = form.data['review'],
+            star = form.data['star'],
+            reviewer_id = current_user.id,
+            product_id = productId
+        )
+        db.session.add(new_review)
+        db.session.commit()
+
+        return new_review.to_dict(), 200
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
