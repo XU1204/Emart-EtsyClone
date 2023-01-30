@@ -32,7 +32,7 @@ class Product(db.Model):
         product_rating = sum(
             [review.star for review in self.reviews]) / len(self.reviews) if len(self.reviews) > 0 else None
         total_reviews = len(self.reviews)
-        sales_num = sum([purchase.quantity for purchase in self.purchases])
+        # sales_num = sum([purchase.quantity for purchase in self.purchases])
 
         return {
             "id": self.id,
