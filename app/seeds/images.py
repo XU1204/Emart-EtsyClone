@@ -1,6 +1,6 @@
 from app.models import db, ProductImage, environment, SCHEMA
 
-def seed_images():
+def seed_productImages():
     images = (
         ['1', 'https://i.etsystatic.com/6120089/r/il/96a56f/3055395537/il_1140xN.3055395537_jcej.jpg'],
         ['2', 'https://i.etsystatic.com/11577357/r/il/0cfce0/1376371256/il_1140xN.1376371256_jb5f.jpg'],
@@ -34,7 +34,7 @@ def seed_images():
         db.session.add(image)
         db.session.commit()
 
-def undo_images():
+def undo_productImages():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.productImages RESTART IDENTITY CASCADE;")
     else:
