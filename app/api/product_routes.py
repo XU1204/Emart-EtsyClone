@@ -222,28 +222,3 @@ def create_review(productId):
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# update a review for a product
-@product_routes.route('/<int:productId>/reviews/<int:reviewId>', methods=['PUT'])
-@login_required
-def update_review(productId, reviewId):
-    form = ReviewForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-
-    review = Review.query.filter(Review.id == reviewId).one()
-
-    if not review:
-        return {'errors': f'Review {reviewId} not found!'}, 404
-
-    if review.reviewer_id != current_user.id:
-        return {'errors': 'Unauthorized!'}, 403
-
-    if form.validate_on_submit():
-        review.star = form.data['star']
-        review.review = form.data['review']
-
-        db.session.add(review)
-        db.session.commit()
-
-        return review.to_dict(), 200
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
