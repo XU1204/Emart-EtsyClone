@@ -111,3 +111,21 @@
     justify-content:space-between;
     align-items: center;
 }
+
+.detail-review-top{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    border: 2px solid rebeccapurple;
+    padding-right: 40px;
+}
+.detail-review-top>i{
+    font-size: 28px;
+    bottom: -20px;
+}
+.detail-review-top>i:hover{
+    cursor: pointer;
+}
+.detail-review-user-time {
+    display: flex;
+}

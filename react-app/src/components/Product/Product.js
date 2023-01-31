@@ -33,7 +33,7 @@ function Product () {
                     </div>
                 ))}
             </div>
-            <h3>Popular products right now</h3>
+            <h3 id='product-h3'>Popular products right now</h3>
             <div className="display-product-container">
                 {allProducts.map(product => (
                     <NavLink key={product.id} to={`/products/${product.id}`} style={{ color: 'black', textDecoration: 'none'}}>

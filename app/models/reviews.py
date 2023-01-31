@@ -24,10 +24,13 @@ class Review(db.Model):
             "star": self.star,
             "reviewerId": self.reviewer_id,
             "productId": self.product_id,
-            # "Reviewer": self.reviewer.to_dict(),
-            # "Product": self.product.to_dict()
+            "createdAt": self.created_at,
+            "updatedAt": self.updated_at,
             "Product": {
                 "images": [x.to_dict() for x in self.product.images],
                 "name": self.product.name
+            },
+            "User": {
+                'username': self.reviewer.username
             }
         }

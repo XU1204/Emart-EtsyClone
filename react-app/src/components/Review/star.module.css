@@ -1,0 +1,55 @@
+.wrapper i {
+    margin: 0 0.1rem
+}
+
+.stars {
+    background-image: url("https://d1irxr40exwge2.cloudfront.net/stars.png");
+    background-repeat: no-repeat;
+    align-self: center;
+    height: 18px;
+    width: 80px;
+}
+
+.five {
+    background-position: -2px -222px;
+}
+
+.four_half {
+    background-position: -2px -262px;
+}
+
+.four {
+    background-position: -2px -242px;
+}
+
+.three_half {
+    background-position: -2px -302px;
+}
+
+.three {
+    background-position: -2px -282px;
+}
+
+.two_half {
+    background-position: -2px -342px;
+}
+
+.two {
+    background-position: -2px -322px;
+}
+
+.one_half {
+    background-position: -2px -382px;
+}
+
+.one {
+    background-position: -2px -362px;
+}
+
+.zero_half {
+    background-position: -2px -422px;
+}
+
+.zero {
+    background-position: -2px -402px;
+}
