@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
 import { createReview } from '../../store/review';
+import styles from './review.module.css'
 
 const CreateReview = ({product}) => {
     const [showModal, setShowModal] = useState(false);
@@ -35,7 +36,7 @@ const CreateReview = ({product}) => {
 
     return (
         <div>
-             <button onClick={()=> setShowModal(true)} className="change-product-button" title='Create Review'><i class="fa-regular fa-comment"></i></button>
+             <button onClick={()=> setShowModal(true)} className={styles.create} title='Create Review'><i class="fa-regular fa-comment"></i></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <div className="update-listing-container">

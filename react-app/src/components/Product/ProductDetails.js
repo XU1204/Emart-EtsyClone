@@ -31,27 +31,6 @@ function ProductDetail () {
     if (!carts) return null;
     const isExist = carts.find(cart => cart.itemId === +productId)
 
-
-    const handleSubmit = async () => {
-
-        // if (isFavored) {
-        //     await dispatch(removeFavorite(favorite.id))
-        //     setIsFavored(false)
-        //     heart = (
-        //         <i class="fa-regular fa-heart"></i>
-        //     )
-        // } else {
-        //     const payload = {productId}
-        //     await dispatch(createFavorite(payload))
-        //     setIsFavored(true)
-        //     heart = (
-        //         <i class="fa-solid fa-heart" style={{color: 'red'}}></i>
-        //     )
-        // }
-    }
-
-
-
     return (
         <div className="detail-cantainer">
             <div className="detail-left-container">
@@ -69,7 +48,7 @@ function ProductDetail () {
                     {product.reviews.length && product.reviews.map(review => (
                         <div className="detail-each-review-container">
                             <Star rating={review.star} />
-                            <p style={{fontSize: '18px', margin: '10px auto 0',}}>{review.review}</p>
+                            <p style={{fontSize: '18px', margin: '10px auto 5px',}}>{review.review}</p>
                             <div className="detail-review-user-time">
                                 <img src={userIcon} alt='user icon'></img>
                                 <p>{review.User.username}</p>
@@ -83,9 +62,6 @@ function ProductDetail () {
                 <p id='detail-name'>{product.name}</p>
                 <div className="price-heart-container">
                     <div id='detail-price'>${product.price.toFixed(2)}</div>
-                    {/* <div className="detail-heart-container">
-                        <button id='detail-heart' onClick={(e) => handleSubmit()} type='submit'>{heart}</button>
-                    </div> */}
                     <CreateFavorite product={product} />
                 </div>
                 <CreateCart product={product} isExist={isExist}/>
@@ -101,8 +77,7 @@ function ProductDetail () {
                 <p id='detail-description'>{product.description}</p>
             </div>
         </div>
-
     )
 }
 
-export default ProductDetail
+export default ProductDetail;
