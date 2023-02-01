@@ -2,50 +2,50 @@
     background-image: url("https://d1irxr40exwge2.cloudfront.net/stars.png");
     background-repeat: no-repeat;
     align-self: center;
-    height: 25px;
+    height: 22px;
     width: 95px;
 }
 
 .five {
-    background-position: -2px -387px;
+    background-position: -2px -390px;
 }
 
 .four_half {
-    background-position: -195px -459px;
+    background-position: -195px -462px;
 }
 
 .four {
-    background-position: -292px -483px;
+    background-position: -292px -486px;
 }
 
 .three_half {
-    background-position: -2px -412px;
+    background-position: -2px -415px;
 }
 
 .three {
-    background-position: -98px -435px;
+    background-position: -98px -438px;
 }
 
 .two_half {
-    background-position: -98px -459px;
+    background-position: -98px -462px;
 }
 
 .two {
-    background-position: -195px -483px;
+    background-position: -195px -486px;
 }
 
 .one_half {
-    background-position: -98px -483px;
+    background-position: -98px -486px;
 }
 
 .one {
-    background-position: -2px -435px;
+    background-position: -2px -438px;
 }
 
 .zero_half {
-    background-position: -2px -483px;
+    background-position: -2px -486px;
 }
 
 .zero {
-    background-position: -2px -458px;
+    background-position: -2px -462px;
 }

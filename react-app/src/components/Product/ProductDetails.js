@@ -45,7 +45,7 @@ function ProductDetail () {
                         </div>
                         {product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
-                    {product.reviews.length && product.reviews.map(review => (
+                    {product.reviews.length>0 && product.reviews.map(review => (
                         <div className="detail-each-review-container">
                             <Star rating={review.star} />
                             <p style={{fontSize: '18px', margin: '10px auto 5px',}}>{review.review}</p>

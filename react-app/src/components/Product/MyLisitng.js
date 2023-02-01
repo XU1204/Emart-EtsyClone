@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProductsOfCurrent, removeProdcut } from "../../store/product";
-import './product.css'
 import UpdateProduct from "./UpdateProduct";
+import Star from "../Review/Star";
+import './product.css'
 
 const MyListing = () => {
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const MyListing = () => {
                                 onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                             <div className="product-details">
                                 <p className="product-name">{product.name}</p>
-                                <p className="star">★★★★★</p>
+                                <p className="star"><Star rating={product.productRating} />({product.totalReviews})</p>
                             </div>
                             <p id='my-lst-price'>${Number(product.price).toFixed(2)}</p>
                             </NavLink>
