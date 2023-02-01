@@ -7,6 +7,8 @@ import CreateCart from "../Cart/CreateCart";
 import Star from "../Review/Star";
 import CreateFavorite from "../Favorite/CreateFavorite";
 import CreateReview from "../Review/CreateReview";
+import UpdateReview from "../Review/UpdateReview";
+import { getReviewsOfProduct, removeReview } from "../../store/review";
 import './productDetails.css'
 import cart from '../../assets/cart.png'
 import truck from '../../assets/truck.png'
@@ -16,16 +18,16 @@ function ProductDetail () {
     const dispatch = useDispatch()
     const { productId } = useParams()
 
-    useEffect(() => {
-        dispatch(getProducts())
-        dispatch(getCarts())
-        // dispatch(getFavoritsofCurrent())
-    }, [dispatch])
-
     const allProducts = useSelector(state => Object.values(state.products))
     const product = allProducts.find(product => product.id === +productId)
     const carts = useSelector(state => Object.values(state.carts))
     const user = useSelector(state => Object.values(state.session)[0])
+
+    useEffect(() => {
+        dispatch(getProducts())
+        dispatch(getCarts())
+        dispatch(getReviewsOfProduct(product?.id))
+    }, [dispatch, product?.reviews])
 
     if(!product) return null
     if (!carts) return null;
@@ -47,7 +49,15 @@ function ProductDetail () {
                     </div>
                     {product.reviews.length>0 && product.reviews.map(review => (
                         <div className="detail-each-review-container">
-                            <Star rating={review.star} />
+                            <div className="detail-review-firstline">
+                                <Star rating={review.star} />
+                                {review.reviewerId === user.id && (
+                                    <div className="change-review-container" style={{marginRight: '55px'}}>
+                                        <UpdateReview review={review} />
+                                        <button onClick={() => dispatch(removeReview(review.id))} className='change-review-btn' title='Delete Review'><i className="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                )}
+                            </div>
                             <p style={{fontSize: '18px', margin: '10px auto 5px',}}>{review.review}</p>
                             <div className="detail-review-user-time">
                                 <img src={userIcon} alt='user icon'></img>

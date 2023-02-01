@@ -57,3 +57,4 @@ class Product(db.Model):
             "reviews": [x.to_dict() for x in self.reviews],
             "images": [x.to_dict() for x in self.images]
         }
+

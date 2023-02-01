@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
-import { createReview } from '../../store/review';
+import { createReview, getReviewsOfProduct } from '../../store/review';
 import styles from './review.module.css'
+import { useHistory } from 'react-router-dom';
 
 const CreateReview = ({product}) => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [star, setStar] = useState(5)
     const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([]);
+
+    // useEffect(() => {
+    //     dispatch(getReviewsOfProduct(product.id))
+    // }, [dispatch])
 
     const payload = {
         star,
@@ -31,6 +37,7 @@ const CreateReview = ({product}) => {
             setStar(5)
             setComment("")
             setShowModal(false)
+            history.push(`/products/${product.id}`)
         })
     }
 

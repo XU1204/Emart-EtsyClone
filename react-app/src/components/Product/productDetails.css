@@ -106,7 +106,9 @@
     cursor: pointer;
 }
 
-.price-heart-container{
+.price-heart-container,
+.detail-review-firstline,
+.change-review-container {
     display: flex;
     justify-content:space-between;
     align-items: center;
@@ -118,7 +120,7 @@
 }
 
 .detail-each-review-container{
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .detail-review-top{
@@ -159,4 +161,18 @@
     border-radius: 100%;
     position: relative;
     left: -5px;
+}
+
+.change-review-btn{
+    border: none;
+    background-color: white;
+}
+.change-review-btn>i{
+    font-size: 18px;
+    position: relative;
+    margin-left: 10px;
+}
+.change-review-btn>i:hover{
+    cursor: pointer;
+    bottom: -2px;
 }
