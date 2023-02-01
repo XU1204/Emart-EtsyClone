@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProducts } from "../../store/product";
+import Star from "../Review/Star";
 import './product.css'
 
 
@@ -42,7 +43,7 @@ function Product () {
                             onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                         <div>
                             <p className="product-name">{product.name}</p>
-                            <p className="star">★★★★★</p>
+                            <p className="star">★★★★★☆({product.totalReviews})</p>
                             <p>${Number(product.price).toFixed(2)}</p>
                         </div>
                     </div>
