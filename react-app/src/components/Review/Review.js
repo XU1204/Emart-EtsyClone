@@ -13,7 +13,6 @@ const MyReviews = () => {
     }, [dispatch])
 
     const reviews = useSelector(state => Object.values(state.reviews))
-    console.log("review front++++++++", reviews)
 
     let exist;
     if (reviews.length) exist = true

@@ -52,7 +52,7 @@ class Product(db.Model):
                 "id": self.category.id,
                 "categoryName": self.category.category_name,
             },
-            "product_rating": product_rating,
+            "productRating": product_rating,
             "totalReviews": total_reviews,
             "reviews": [x.to_dict() for x in self.reviews],
             "images": [x.to_dict() for x in self.images]

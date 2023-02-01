@@ -6,10 +6,11 @@ import { getCarts } from "../../store/cart";
 import CreateCart from "../Cart/CreateCart";
 import Star from "../Review/Star";
 import CreateFavorite from "../Favorite/CreateFavorite";
+import CreateReview from "../Review/CreateReview";
 import './productDetails.css'
 import cart from '../../assets/cart.png'
 import truck from '../../assets/truck.png'
-
+import userIcon from '../../assets/user-icon.jpeg'
 
 function ProductDetail () {
     const dispatch = useDispatch()
@@ -57,18 +58,22 @@ function ProductDetail () {
                 <img src={product.images[0]?.url}
                     onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
                 </img>
-                <div>
+                <div className="detail-review-section">
                     <div className="detail-review-top">
-                        <p>{product.totalReviews} shop {product.totalReviews > 1? 'reviews' : 'review'}</p>
-                        {product.sellerId !== user.id && <i class="fa-regular fa-comment" title='Leave a review'></i>}
+                        <div>
+                            <h3>{product.totalReviews} shop {product.totalReviews > 1? 'reviews' : 'review'}</h3>
+                            <Star rating={product.productRating} />
+                        </div>
+                        {product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
                     {product.reviews.length && product.reviews.map(review => (
-                        <div>
+                        <div className="detail-each-review-container">
                             <Star rating={review.star} />
-                            <p>{review.review}</p>
+                            <p style={{fontSize: '18px', margin: '10px auto 0',}}>{review.review}</p>
                             <div className="detail-review-user-time">
+                                <img src={userIcon} alt='user icon'></img>
                                 <p>{review.User.username}</p>
-                                <p>{review.updatedAt.slice(0, 16)}</p>
+                                <p style={{marginLeft: '10px'}}>{review.updatedAt.slice(0, 16)}</p>
                             </div>
                         </div>
                     ))}
