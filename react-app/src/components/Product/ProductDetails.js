@@ -27,7 +27,7 @@ function ProductDetail () {
         dispatch(getProducts())
         dispatch(getCarts())
         dispatch(getReviewsOfProduct(product?.id))
-    }, [dispatch, product?.reviews])
+    }, [dispatch, ])
 
     if(!product) return null
     if (!carts) return null;
@@ -45,13 +45,13 @@ function ProductDetail () {
                             <h3>{product.totalReviews} shop {product.totalReviews > 1? 'reviews' : 'review'}</h3>
                             <Star rating={product.productRating} />
                         </div>
-                        {product.sellerId !== user.id && <CreateReview product={product} />}
+                        {user && product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
                     {product.reviews.length>0 && product.reviews.map(review => (
                         <div className="detail-each-review-container">
                             <div className="detail-review-firstline">
                                 <Star rating={review.star} />
-                                {review.reviewerId === user.id && (
+                                { user && review.reviewerId === user.id && (
                                     <div className="change-review-container" style={{marginRight: '55px'}}>
                                         <UpdateReview review={review} />
                                         <button onClick={() => dispatch(removeReview(review.id))} className='change-review-btn' title='Delete Review'><i className="fa-solid fa-xmark"></i></button>

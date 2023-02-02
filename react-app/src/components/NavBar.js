@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import SignUpForm from './auth/SignUpForm';
 import './NavBar.css'
+import { getProducts } from '../store/product';
 
 const NavBar = () => {
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const [showMenu, setShowMenu] = useState(false);
-    const [searchInput, setSearchInput] = useState("");
+    const [filterData, setFilterData] = useState([]);
+
+    useEffect(() => {
+      dispatch(getProducts())
+    },[dispatch])
 
     const openMenu = () => {
       if (showMenu) return;
       setShowMenu(true);
     };
+
     useEffect(() => {
       if (!showMenu) return;
 
@@ -28,28 +35,14 @@ const NavBar = () => {
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
-    const handleChange = (e) => {
-      e.preventDefault();
-      setSearchInput(e.target.value);
-    };
-
     const user = useSelector(state => Object.values(state.session)[0])
+    const products = useSelector(state => Object.values(state.products))
 
     let content
     if (!user) {
         content = (
           <div className='navbar-right'>
-            {/* <div>
-              <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/login' exact={true} activeClassName='active'>
-                <button className='navbar-button'>Login</button>
-              </NavLink>
-            </div> */}
             <LoginForm />
-            {/* <div>
-              <NavLink style={{ color: 'black', textDecoration: 'none'}} to='/sign-up' exact={true} activeClassName='active'>
-                <button className='navbar-button'>Sign Up</button>
-              </NavLink>
-            </div> */}
             <SignUpForm />
           </div>
         )
@@ -91,6 +84,27 @@ const NavBar = () => {
       )
     }
 
+    let search = ''
+    const handleFilter = (e) => {
+      search = e.target.value
+      console.log('+++++++++searcgh', search)
+      const filter = products.filter((product) => {
+          return product.name.toLowerCase().includes(search.toLowerCase())
+      })
+      if (search === '') setFilterData([])
+      else setFilterData(filter)
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      // if (searchInput) {
+      //     history.push(`/s?k=${searchInput.replace(" ", "+")}`);
+      // } else {
+      //     history.push("/");
+      // }
+      // formRef.current.classList.remove(styles.formFocus);
+      setFilterData([])
+    }
 
   return (
     <nav>
@@ -103,12 +117,22 @@ const NavBar = () => {
         <div id='search'>
           <form action="/" method="GET" className="form">
             <input
-              type="search"
-              placeholder="Search for anything"
-              onChange={handleChange}
-              value={searchInput} />
-            <button type="submit"  onClick={(e) => {e.preventDefault(); history.push('/coming-soon')}}><i class="fa-solid fa-magnifying-glass"></i></button>
+              type="text"
+              placeholder={search || "Search for anything"}
+              onChange={handleFilter}
+               />
+            <button type="submit" onClick={handleSubmit} ><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
+          {filterData.length != 0 && (
+                < div className='searchResults'>
+                    {filterData.map((value, i) => {
+                      return (
+                      <button style={{border:'none', backgroundColor:'white', textAlign:'left', padding:'0'}} onClick={() => setFilterData([])}>
+                        <NavLink style={{ textDecoration:'none', color: 'black' }} key={i} to={`/products/${value.id}`}><div id='search-name'>{value.name.slice(0, 100)}...</div></NavLink>
+                      </button>)
+                    })}
+                </div>
+            )}
         </div>
         {content}
       </div>
