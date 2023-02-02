@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
-import { updateReview } from '../../store/review';
+import { createReview, getReviewsOfProduct } from '../../store/review';
+import styles from './review.module.css'
+import { useHistory } from 'react-router-dom';
 
-const UpdateReview = ({review}) => {
+const CreateReview = ({product}) => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch()
+    const history = useHistory()
 
-    const [star, setStar] = useState(review.star)
-    const [comment, setComment] = useState(review.review)
+    const [star, setStar] = useState(5)
+    const [comment, setComment] = useState('')
     const [errors, setErrors] = useState([]);
+
+    // useEffect(() => {
+    //     dispatch(getReviewsOfProduct(product.id))
+    // }, [dispatch])
 
     const payload = {
         star,
@@ -25,22 +32,23 @@ const UpdateReview = ({review}) => {
         setErrors(errors)
         if (errors.length) return;
 
-        return await dispatch(updateReview(review.id, payload))
+        return await dispatch(createReview(product.id, payload))
         .then(() => {
-            setStar(star)
-            setComment(comment)
+            setStar(5)
+            setComment("")
             setShowModal(false)
+            history.push(`/products/${product.id}`)
         })
     }
 
     return (
         <div>
-             <button onClick={()=> setShowModal(true)} className="change-review-btn" title='Edit Review'><i className="fa-solid fa-pen"></i></button>
+             <button onClick={()=> setShowModal(true)} className={styles.create} title='Create Review'><i class="fa-regular fa-comment"></i></button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <div className="update-listing-container">
                     <form className="update-listing-form" onSubmit={handleSubmit}>
-                            <h4>Edit Review</h4>
+                            <h4>Create Review</h4>
                             <ul className='error-ul'>
                                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                             </ul>
@@ -51,8 +59,7 @@ const UpdateReview = ({review}) => {
                                 <input required
                                     type="number" min='1' max='5'
                                     onChange={(e) => setStar(e.target.value)}
-                                    value={star}
-                                    placeholder={review.star}>
+                                    value={star}>
                                 </input>
                             </div>
                             <div className="update-listing-input">
@@ -63,7 +70,6 @@ const UpdateReview = ({review}) => {
                                     type="text"
                                     onChange={(e) => setComment(e.target.value)}
                                     value={comment}
-                                    placeholder={review.review}
                                     style={{resize: 'none'}}>
                                 </textarea>
                             </div>
@@ -79,4 +85,4 @@ const UpdateReview = ({review}) => {
     )
 }
 
-export default UpdateReview;
+export default CreateReview;

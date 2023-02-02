@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProducts } from "../../store/product";
+import Star from "../Review/Star";
 import './product.css'
 
 
@@ -33,7 +34,7 @@ function Product () {
                     </div>
                 ))}
             </div>
-            <h3>Popular products right now</h3>
+            <h3 id='product-h3'>Popular products right now</h3>
             <div className="display-product-container">
                 {allProducts.map(product => (
                     <NavLink key={product.id} to={`/products/${product.id}`} style={{ color: 'black', textDecoration: 'none'}}>
@@ -42,7 +43,7 @@ function Product () {
                             onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}></img>
                         <div>
                             <p className="product-name">{product.name}</p>
-                            <p className="star">★★★★★</p>
+                            <p className="star"><Star rating={product.productRating} />({product.totalReviews})</p>
                             <p>${Number(product.price).toFixed(2)}</p>
                         </div>
                     </div>

@@ -1,0 +1,76 @@
+.create{
+    border: none;
+    background-color: white;
+}
+.create>i{
+    font-size: 24px;
+    position: relative;
+}
+.create>i:hover{
+    cursor: pointer;
+    bottom: -2px;
+}
+
+.last {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#discover{
+    color: black;
+}
+#discover:hover {
+    color: grey;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+}
+
+.titleWrapper>p{
+    padding-top: 10px;
+}
+
+.reviewWrapper{
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-left: 10vw;
+    border: 1px solid lightgray;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.reviewWrapper:hover{
+    box-shadow: 0 5px 5px rgba(128, 128, 128, 0.313);
+}
+
+.middle{
+    display: flex;
+    align-items: center;
+}
+.image{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.content {
+    width: 80%;
+    margin-left: 20px;
+}
+
+.change {
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+    text-align: center;
+    gap: 50%;
+    width: 20%;
+}
