@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getFavoritsofCurrent, removeFavorite } from "../../store/favorite";
+import Star from "../Review/Star";
 import styles from './favorite.module.css'
 
 const MyFavorites = () => {
@@ -32,6 +33,7 @@ const MyFavorites = () => {
                                     onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
                                 </img>
                                 <h4 className="product-name" title={favorite.Product.name}>{favorite.Product.name}</h4>
+                                <p className="star"><Star rating={favorite.Product.productRating} />({favorite.Product.totalReviews})</p>
                             </NavLink>
                             <div className={styles.priceWrapper}>
                                 <p>${favorite.Product.price.toFixed(2)}</p>
