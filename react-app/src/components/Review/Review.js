@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getReviewsOfCurrent, removeReview } from "../../store/review";
 import UpdateReview from "./UpdateReview";
+import Star from './Star'
 import styles from './review.module.css'
 
 const MyReviews = () => {
@@ -20,21 +21,29 @@ const MyReviews = () => {
 
     return (
         <div>
-            <h1>My Reviews List</h1>
+            <div className={styles.titleWrapper}>
+                <h1>My Reviews</h1>
+                {exist && <p> {reviews.length} {reviews.length > 1? 'reviews':'review'}</p>}
+            </div>
             <div>
             {exist && reviews.map(review => (
-                <div>
+                <div className={styles.reviewWrapper}>
                     <NavLink key={review.id} to={`/products/${review.productId}`} style={{ color: 'black', textDecoration: 'none'}}>
-                                <img className='' src={review.Product.images[0].url} alt={review.Product.name}
-                                    onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
-                                </img>
+                        <div className={styles.middle}>
+                            <img className={styles.image} src={review.Product.images[0].url} alt={review.Product.name}
+                                onError={e => { e.currentTarget.src = "https://media.istockphoto.com/id/897730230/vector/hands-holding-a-gift-box-birthday-anniversary-celebration-pov-flat-editable-vector.jpg?s=612x612&w=0&k=20&c=CHFebwU2TcxGscBx7ObcM4LGciCFWBIQA2poO-izIcs="}}>
+                            </img>
+                            <div className={styles.content}>
                                 <h4 className="" title={review.Product.name}>{review.Product.name}</h4>
-                                <p><strong>My Review:</strong>{review.review}</p>
-                                <p><strong>My Rating:</strong>{review.star}</p>
+                                <p><strong>Review: </strong>{review.review}</p>
+                                <p style={{display: 'flex'}}><strong>Rating: &nbsp;</strong><Star rating={review.star}/></p>
+                                <p><strong>Date: &nbsp;</strong>{review.updatedAt.slice(0,16)}</p>
+                            </div>
+                        </div>
                     </NavLink>
-                    <div id='pen-cross'>
+                    <div className={styles.change}>
                             <UpdateReview review={review} />
-                            <button onClick={() => dispatch(removeReview(review.id))} className="" title='Delete Review'><i className="fa-solid fa-xmark"></i></button>
+                            <button onClick={() => dispatch(removeReview(review.id))} className="change-review-btn" title='Delete Review'><i className="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             ))}
@@ -49,7 +58,6 @@ const MyReviews = () => {
             )}
         </div>
     )
-
 }
 
 export default MyReviews

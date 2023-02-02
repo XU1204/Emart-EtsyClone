@@ -35,7 +35,7 @@ const MyFavorites = () => {
                             </NavLink>
                             <div className={styles.priceWrapper}>
                                 <p>${favorite.Product.price.toFixed(2)}</p>
-                                <button onClick={() => dispatch(removeFavorite(favorite.id))} className={styles.button}><i className="fa-solid fa-heart" style={{color: '#a5192e'}}></i></button>
+                                <button onClick={() => dispatch(removeFavorite(favorite.id))} className={styles.button} title='Remove from Favorite List'><i className="fa-solid fa-heart" style={{color: '#a5192e'}}></i></button>
                             </div>
                         </div>
                     ))}
