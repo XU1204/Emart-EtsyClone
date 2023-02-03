@@ -84,16 +84,16 @@ const NavBar = () => {
       )
     }
 
-    let search = ''
-    const handleFilter = (e) => {
-      search = e.target.value
-      console.log('+++++++++searcgh', search)
-      const filter = products.filter((product) => {
-          return product.name.toLowerCase().includes(search.toLowerCase())
-      })
-      if (search === '') setFilterData([])
-      else setFilterData(filter)
-    }
+    // let search = ''
+    // const handleFilter = (e) => {
+    //   search = e.target.value
+    //   console.log('+++++++++searcgh', search)
+    //   const filter = products.filter((product) => {
+    //       return product.name.toLowerCase().includes(search.toLowerCase())
+    //   })
+    //   if (search === '') setFilterData([])
+    //   else setFilterData(filter)
+    // }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -118,12 +118,12 @@ const NavBar = () => {
           <form action="/" method="GET" className="form">
             <input
               type="text"
-              placeholder={search || "Search for anything"}
-              onChange={handleFilter}
+              placeholder="Search for anything"
+              // onChange={handleFilter}
                />
             <button type="submit" onClick={handleSubmit} ><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
-          {filterData.length != 0 && (
+          {/* {filterData.length != 0 && (
                 < div className='searchResults'>
                     {filterData.map((value, i) => {
                       return (
@@ -132,7 +132,7 @@ const NavBar = () => {
                       </button>)
                     })}
                 </div>
-            )}
+            )} */}
         </div>
         {content}
       </div>

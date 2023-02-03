@@ -121,7 +121,3 @@ li:hover #sign-out-button{
 #search-name:hover {
     background-color: rgba(211, 211, 211, 0.486);
 }
-
-.searchResults::-webkit-scrollbar {
-    display: none;
-}

@@ -22,12 +22,16 @@ function ProductDetail () {
     const product = allProducts.find(product => product.id === +productId)
     const carts = useSelector(state => Object.values(state.carts))
     const user = useSelector(state => Object.values(state.session)[0])
+    const reviews = useSelector(state => Object.values(state.reviews))
 
     useEffect(() => {
         dispatch(getProducts())
         dispatch(getCarts())
+    }, [dispatch])
+
+    useEffect(() => {
         dispatch(getReviewsOfProduct(product?.id))
-    }, [dispatch, ])
+    }, [dispatch, product?.reviews])
 
     if(!product) return null
     if (!carts) return null;
@@ -47,7 +51,7 @@ function ProductDetail () {
                         </div>
                         {user && product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
-                    {product.reviews.length>0 && product.reviews.map(review => (
+                    {reviews.length>0 && reviews.map(review => (
                         <div className="detail-each-review-container">
                             <div className="detail-review-firstline">
                                 <Star rating={review.star} />
@@ -72,7 +76,7 @@ function ProductDetail () {
                 <p id='detail-name'>{product.name}</p>
                 <div className="price-heart-container">
                     <div id='detail-price'>${product.price.toFixed(2)}</div>
-                    <CreateFavorite product={product} />
+                    {user && <CreateFavorite product={product} />}
                 </div>
                 <CreateCart product={product} isExist={isExist}/>
                 <div className="detail-small-img-txt">
