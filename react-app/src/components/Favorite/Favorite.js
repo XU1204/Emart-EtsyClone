@@ -24,6 +24,7 @@ const MyFavorites = () => {
                 <h1>Favorites items</h1>
                 {exist && <p> {favorites.length} {favorites.length > 1? 'items':'item'}</p>}
             </div>
+            <div id='popular-product-wrapper'>
             <div className="display-product-wrapper">
                 <div className="display-product-container">
                     {exist && favorites.map(favorite => (
@@ -42,6 +43,7 @@ const MyFavorites = () => {
                         </div>
                     ))}
                 </div>
+            </div>
             </div>
             {!exist && (
                 <div className={styles.last}>

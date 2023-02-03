@@ -19,6 +19,7 @@ const UpdateReview = ({review}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log('it is working 1111111')
         let errors = [];
         if (comment.length > 254) errors.push('Review must be less than 255 characters.')
         if (comment.trim().length === 0) errors.push('Review should not contain only spaces.')

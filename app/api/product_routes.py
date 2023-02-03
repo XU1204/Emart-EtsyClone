@@ -222,3 +222,10 @@ def create_review(productId):
         return new_review.to_dict(), 200
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+# search
+@product_routes.route('/search/<keyword>')
+def search_products(keyword):
+    products = Product.query.filter(Product.name.ilike(f'%{keyword}%')).all()
+    return {'Products': [product.to_dict() for product in products]}, 200

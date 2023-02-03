@@ -22,6 +22,7 @@ const MyListing = () => {
         )
     } else {
         content = (
+            <div id='popular-product-wrapper'>
             <div className="display-product-wrapper">
                 <div className="display-product-container">
                     {products.map(product => (
@@ -42,6 +43,7 @@ const MyListing = () => {
                         </div>
                     ))}
                 </div>
+            </div>
             </div>
         )
     }
