@@ -99,11 +99,11 @@ const NavBar = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      // if (searchInput) {
-      //     history.push(`/s?k=${searchInput.replace(" ", "+")}`);
-      // } else {
-      //     history.push("/");
-      // }
+      if (input) {
+          history.push(`/products/search/${input}`);
+      } else {
+          history.push("/");
+      }
       // formRef.current.classList.remove(styles.formFocus);
       setFilterData([])
     }

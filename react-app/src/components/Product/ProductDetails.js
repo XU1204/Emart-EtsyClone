@@ -23,6 +23,8 @@ function ProductDetail () {
     const carts = useSelector(state => Object.values(state.carts))
     const user = useSelector(state => Object.values(state.session)[0])
     const reviews = useSelector(state => Object.values(state.reviews))
+    const totalRating = reviews.reduce((sum, ele) => sum + ele.star, 0) / reviews.length
+
 
     useEffect(() => {
         dispatch(getProducts())
@@ -46,8 +48,8 @@ function ProductDetail () {
                 <div className="detail-review-section">
                     <div className="detail-review-top">
                         <div>
-                            <h3>{product.totalReviews} shop {product.totalReviews > 1? 'reviews' : 'review'}</h3>
-                            <Star rating={product.productRating} />
+                            <h3>{reviews?.length} shop {reviews?.length > 1? 'reviews' : 'review'}</h3>
+                            <Star rating={totalRating? totalRating:0} />
                         </div>
                         {user && product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
