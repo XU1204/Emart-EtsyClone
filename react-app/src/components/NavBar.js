@@ -13,6 +13,7 @@ const NavBar = () => {
 
     const [showMenu, setShowMenu] = useState(false);
     const [filterData, setFilterData] = useState([]);
+    const [input, setInput] = useState('')
 
     useEffect(() => {
       dispatch(getProducts())
@@ -84,16 +85,17 @@ const NavBar = () => {
       )
     }
 
-    // let search = ''
-    // const handleFilter = (e) => {
-    //   search = e.target.value
-    //   console.log('+++++++++searcgh', search)
-    //   const filter = products.filter((product) => {
-    //       return product.name.toLowerCase().includes(search.toLowerCase())
-    //   })
-    //   if (search === '') setFilterData([])
-    //   else setFilterData(filter)
-    // }
+
+    const handleFilter = async (e) => {
+      console.log('+++++++++', e.target.value)
+      await setInput(e.target.value)
+      console.log('+++++++++input', input)
+      const filter = products.filter((product) => {
+          return product.name.toLowerCase().includes(input.toLowerCase())
+      })
+      if (input === '') setFilterData([])
+      else setFilterData(filter)
+    }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -119,11 +121,12 @@ const NavBar = () => {
             <input
               type="text"
               placeholder="Search for anything"
-              // onChange={handleFilter}
-               />
+              onChange={handleFilter}
+              value={input} />
+            {!!input.length && <div className='search-cancel-btn' onClick={() => {setInput(''); setFilterData([])}}><i className="fa-solid fa-xmark"></i></div>}
             <button type="submit" onClick={handleSubmit} ><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
-          {/* {filterData.length != 0 && (
+          {filterData.length != 0 && (
                 < div className='searchResults'>
                     {filterData.map((value, i) => {
                       return (
@@ -132,7 +135,7 @@ const NavBar = () => {
                       </button>)
                     })}
                 </div>
-            )} */}
+            )}
         </div>
         {content}
       </div>

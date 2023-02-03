@@ -19,6 +19,7 @@ import Category from './components/Category/Category';
 import MyFavorites from './components/Favorite/Favorite';
 import MyReviews from './components/Review/Review';
 import './index.css'
+import SearchResult from './components/SearchResult/SearchResult';
 
 
 function App() {
@@ -90,6 +91,9 @@ function App() {
             {/* <Route path='/images' exact={true} >
               <UploadPicture />
             </Route> */}
+            <Route path='/products/search/:keyword' exact={true} >
+              <SearchResult />
+            </Route>
             <Route path='/' exact={true} >
               <Homepage />
             </Route>
