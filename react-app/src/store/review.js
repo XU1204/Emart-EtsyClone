@@ -77,6 +77,7 @@ export const updateReview= (reviewId, payload) => async dispatch => {
         body: JSON.stringify(payload)
     })
     if (response.ok) {
+        console.log('it is working 2222222')
         const review  = await response.json();
         dispatch(update(review));
         return review

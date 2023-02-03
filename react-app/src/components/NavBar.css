@@ -57,26 +57,40 @@
 
 .form {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    background-color: #f4f4f4;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 50px;
+    outline: none;
 }
 
 .form>input{
     background-color: #f4f4f4;
     width: 100%;
     padding: 10px 35px 10px 15px;
-    border: 2px solid black;
-    border-radius: 100px;
+    border: none;
+    color: black;
+    /* border: 2px solid black; */
+    border-radius: 50px 0 0 50px;
     outline: none;
+}
+.search-cancel-btn{
+    margin-right: 10px;
+}
+.search-cancel-btn:hover{
+    cursor: pointer;
 }
 
 .form>button {
     background: transparent;
     border: none;
-    border-radius: 100px;
-    padding: 0 20px 0;
-    margin: 2px 1px 2px;
+    width: 10%;
+    border-radius: 0 50px 50px 0;
+    padding: 10px 20px 10px;
+    /* margin: 2px 1px 2px; */
     outline: none;
-    margin-left: -55px;
+    /* margin-left: -55px; */
     cursor: pointer;
 }
 
@@ -104,4 +118,21 @@ li:hover #sign-out-button{
 .fa-heart {
     margin-right: 8px;
     width: 1rem
+}
+
+.searchResults {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 20
+}
+#search-name{
+    padding: 5px 15px;
+}
+#search-name:hover {
+    background-color: rgba(211, 211, 211, 0.486);
 }

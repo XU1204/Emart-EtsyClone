@@ -22,10 +22,16 @@ function ProductDetail () {
     const product = allProducts.find(product => product.id === +productId)
     const carts = useSelector(state => Object.values(state.carts))
     const user = useSelector(state => Object.values(state.session)[0])
+    const reviews = useSelector(state => Object.values(state.reviews))
+    const totalRating = reviews.reduce((sum, ele) => sum + ele.star, 0) / reviews.length
+
 
     useEffect(() => {
         dispatch(getProducts())
         dispatch(getCarts())
+    }, [dispatch])
+
+    useEffect(() => {
         dispatch(getReviewsOfProduct(product?.id))
     }, [dispatch, product?.reviews])
 
@@ -42,16 +48,16 @@ function ProductDetail () {
                 <div className="detail-review-section">
                     <div className="detail-review-top">
                         <div>
-                            <h3>{product.totalReviews} shop {product.totalReviews > 1? 'reviews' : 'review'}</h3>
-                            <Star rating={product.productRating} />
+                            <h3>{reviews?.length} shop {reviews?.length > 1? 'reviews' : 'review'}</h3>
+                            <Star rating={totalRating? totalRating:0} />
                         </div>
-                        {product.sellerId !== user.id && <CreateReview product={product} />}
+                        {user && product.sellerId !== user.id && <CreateReview product={product} />}
                     </div>
-                    {product.reviews.length>0 && product.reviews.map(review => (
+                    {reviews.length>0 && reviews.map(review => (
                         <div className="detail-each-review-container">
                             <div className="detail-review-firstline">
                                 <Star rating={review.star} />
-                                {review.reviewerId === user.id && (
+                                { user && review.reviewerId === user.id && (
                                     <div className="change-review-container" style={{marginRight: '55px'}}>
                                         <UpdateReview review={review} />
                                         <button onClick={() => dispatch(removeReview(review.id))} className='change-review-btn' title='Delete Review'><i className="fa-solid fa-xmark"></i></button>
@@ -72,7 +78,7 @@ function ProductDetail () {
                 <p id='detail-name'>{product.name}</p>
                 <div className="price-heart-container">
                     <div id='detail-price'>${product.price.toFixed(2)}</div>
-                    <CreateFavorite product={product} />
+                    {user && <CreateFavorite product={product} />}
                 </div>
                 <CreateCart product={product} isExist={isExist}/>
                 <div className="detail-small-img-txt">

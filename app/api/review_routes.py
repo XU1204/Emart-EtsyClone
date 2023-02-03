@@ -23,8 +23,9 @@ def get_reviews_of_current():
 def update_review(reviewId):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('it is working 33333333')
     review = Review.query.filter(Review.id == reviewId).one()
+    print('review', review)
 
     if not review:
         return {'errors': f'Review {reviewId} not found!'}, 404
